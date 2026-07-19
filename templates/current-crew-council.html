@@ -1,0 +1,279 @@
+{% load static %}
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>বর্তমান ক্রু কাউন্সিল - মুন্সীগঞ্জ পলিটেকনিক রোভার স্কাউট</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <style>
+      @media (max-width: 768px) {
+        .hero {
+          padding: 80px 0; /* Even smaller padding on very small screens */
+          min-height: 50vh;
+          background-attachment: scroll; /* Essential for mobile */
+        }
+
+        .hero h2 {
+          font-size: 1.8rem;
+          margin-bottom: 12px;
+        }
+
+        .hero p {
+          font-size: 1rem;
+          margin-bottom: 25px;
+        }
+
+        /* Ensure background image covers properly on mobile */
+        .hero {
+          background-size: cover;
+          background-position: center center;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero {
+          padding: 60px 0;
+          min-height: 40vh;
+        }
+
+        .hero h2 {
+          font-size: 1.6rem;
+        }
+
+        .hero p {
+          font-size: 0.95rem;
+        }
+
+        .btn {
+          padding: 12px 25px;
+          font-size: 0.95rem;
+        }
+      }
+
+      /* For very small devices */
+      @media (max-width: 375px) {
+        .hero {
+          padding: 50px 0;
+          min-height: 35vh;
+        }
+
+        .hero h2 {
+          font-size: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'nav.html' %}
+
+    <section
+      class="hero"
+      id="hero"
+      style="
+        background-image:
+          linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url('{% static 'images/1.jpg'%}');
+      "
+    >
+      <div class="container">
+        <h2 id="council-name">বর্তমান ক্রু কাউন্সিল</h2>
+        <p id="council-year">
+          N/A শিক্ষাবর্ষের নির্বাচিত ক্রু কাউন্সিল সদস্যগণ
+        </p>
+      </div>
+    </section>
+
+    <!-- Council Members -->
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>ক্রু কাউন্সিল সদস্যগণ</h2>
+        </div>
+
+        <div id="senior-rover" class="team-grid-top"></div>
+
+        <div id="rover-mates" class="team-grid" style="margin-top: 40px"></div>
+
+        <div
+          id="assistant-rover-mates"
+          class="team-grid"
+          style="margin-top: 40px"
+        ></div>
+      </div>
+    </section>
+
+    <!-- <section class="section activities">
+            <div class="container">
+                <div class="section-title">
+                    <h2>বর্তমান কাউন্সিলের অর্জন</h2>
+                </div>
+                <div class="activities-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon"
+                            style="text-align: center; padding: 20px; color: var(--primary);">
+                            <i class="fas fa-users"
+                                style="font-size: 3rem;"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h3>সদস্য সংখ্যা বৃদ্ধি</h3>
+                            <p>বর্তমান কাউন্সিলের সময়ে N/A নতুন সদস্য সংযুক্তি,
+                                যা গ্রুপের ইতিহাসে সর্বোচ্চ।</p>
+                        </div>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon"
+                            style="text-align: center; padding: 20px; color: var(--primary);">
+                            <i class="fas fa-tree" style="font-size: 3rem;"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h3>পরিবেশ সুরক্ষা</h3>
+                            <p>N/A বৃক্ষরোপণ এবং ক্যাম্পাসে প্লাস্টিক মুক্ত
+                                অভিযান সফলভাবে সম্পন্ন।</p>
+                        </div>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon"
+                            style="text-align: center; padding: 20px; color: var(--primary);">
+                            <i class="fas fa-trophy"
+                                style="font-size: 3rem;"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h3>প্রতিযোগিতায় সাফল্য</h3>
+                            <p>N/A</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+    {% include 'footer.html' %}
+
+    <!-- Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          const response = await fetch(
+            "{% static 'data/current-council.json' %}",
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to load JSON: " + response.status);
+          }
+
+          const data = await response.json();
+
+          // Base static URL
+          const STATIC_URL = "/static/";
+
+          // Convert relative image path to static URL
+          function imageUrl(path) {
+            if (!path) return "";
+
+            // Already absolute
+            if (path.startsWith("http") || path.startsWith("/static/")) {
+              return path;
+            }
+
+            // Remove ../ or ./
+            path = path.replace(/^(\.\.\/)+/, "");
+            path = path.replace(/^\.?\//, "");
+
+            return STATIC_URL + path;
+          }
+
+          // Hero
+          document.getElementById("council-name").textContent = data.name;
+          document.getElementById("council-year").textContent =
+            `${data.year} শিক্ষাবর্ষের নির্বাচিত ক্রু কাউন্সিল সদস্যগণ`;
+
+          // Senior Rover
+          const senior = data.seniorRover;
+
+          document.getElementById("senior-rover").innerHTML = `
+            <div class="team-member-top">
+                <div class="member-img">
+                    <img src="${imageUrl(senior.image)}" alt="${senior.name}">
+                </div>
+                <div class="member-info">
+                    <h3>${senior.name}</h3>
+                    <p class="member-role" style="color:#c1121f;">${senior.responsibility}</p>
+                    <p>ডিপার্টমেন্ট: ${senior.department}</p>
+                    <p>উপদল: ${senior.subgroup}</p>
+                </div>
+            </div>
+        `;
+
+          // Rover Mates
+          document.getElementById("rover-mates").innerHTML = (
+            data.roverMates || []
+          )
+            .map(
+              (mate) => `
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="${imageUrl(mate.image)}" alt="${mate.name}">
+                    </div>
+                    <div class="member-info">
+                        <h3>${mate.name}</h3>
+                        <p class="member-role">${mate.responsibility}</p>
+                        <p>ডিপার্টমেন্ট: ${mate.department}</p>
+                        <p>উপদল: ${mate.subgroup}</p>
+                    </div>
+                </div>
+            `,
+            )
+            .join("");
+
+          // Assistant Rover Mates
+          document.getElementById("assistant-rover-mates").innerHTML = (
+            data.assistantRoverMates || []
+          )
+            .map(
+              (a) => `
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="${imageUrl(a.image)}" alt="${a.name}">
+                    </div>
+                    <div class="member-info">
+                        <h3>${a.name}</h3>
+                        <p class="member-role">${a.responsibility}</p>
+                        <p>ডিপার্টমেন্ট: ${a.department}</p>
+                        <p>উপদল: ${a.subgroup}</p>
+                    </div>
+                </div>
+            `,
+            )
+            .join("");
+
+          // Achievements (optional)
+          if (data.achievements && document.getElementById("achievements")) {
+            document.getElementById("achievements").innerHTML =
+              data.achievements
+                .map(
+                  (act) => `
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="${act.icon}"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h3>${act.title}</h3>
+                            <p>${act.description}</p>
+                        </div>
+                    </div>
+                `,
+                )
+                .join("");
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      });
+    </script>
+    <script src="{% static 'js/main.js'%}"></script>
+  </body>
+</html>

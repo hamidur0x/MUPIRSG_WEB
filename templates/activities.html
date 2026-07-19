@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="bn">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>কার্যক্রম - মুন্সীগঞ্জ পলিটেকনিক রোভার স্কাউট</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+
+        <style>
+            @media (max-width: 768px) {
+    .hero {
+        padding: 80px 0; /* Even smaller padding on very small screens */
+        min-height: 50vh;
+        background-attachment: scroll; /* Essential for mobile */
+    }
+    
+    .hero h2 {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+    
+    /* Ensure background image covers properly on mobile */
+    .hero {
+        background-size: cover;
+        background-position: center center;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        padding: 60px 0;
+        min-height: 40vh;
+    }
+    
+    .hero h2 {
+        font-size: 1.6rem;
+    }
+    
+    .hero p {
+        font-size: 0.95rem;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+        font-size: 0.95rem;
+    }
+}
+
+/* For very small devices */
+@media (max-width: 375px) {
+    .hero {
+        padding: 50px 0;
+        min-height: 35vh;
+    }
+    
+    .hero h2 {
+        font-size: 1.4rem;
+    }
+}
+        </style>
+    </head>
+    <body>
+        {% include 'nav.html'%}
+        <!-- Page Hero -->
+        <section class="hero"
+            style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{% static 'images/58.jpg' %}');">
+            <div class="container">
+                <h2>আমাদের কার্যক্রম</h2>
+                <p>বিভিন্ন সামাজিক, শিক্ষামূলক ও স্বেচ্ছাসেবামূলক কার্যক্রম</p>
+            </div>
+        </section>
+        <section class="section activities">
+            <div class="container">
+                <div class="section-title">
+                    <h2>আমাদের কার্যক্রম</h2>
+                    <p>
+                        মুন্সীগঞ্জ পলিটেকনিক ইনস্টিটিউট রোভার স্কাউট গ্রুপ
+                        বিভিন্ন সামাজিক, শিক্ষামূলক ও স্বেচ্ছাসেবামূলক
+                        কার্যক্রমের মাধ্যমে তরুণদের মানবিক মূল্যবোধ ও নেতৃত্বের
+                        গুণাবলি বিকাশে কাজ করে যাচ্ছে। নিচে আমাদের কিছু
+                        নির্বাচিত কার্যক্রমের সংক্ষিপ্ত বিবরণ তুলে ধরা হলো।
+                    </p>
+
+                </div>
+                <a
+                    href="https://www.facebook.com/mpirover/posts/pfbid02Qc4ZJv1tEAGP2TG6keaM5fJUAHEwynaAHbZsf3T1PHtvpeVhPu16DY6eJrtrjv5il"
+                    target="_blank">
+                    <div class="activities-grid">
+                        <div class="activity-card">
+                            <div class="activity-img">
+                                <img src="{% static 'images/activities/২১_ফ্রে.jpg'%}"
+                                    alt="২১ ফেব্রুয়ারি(২০২৫)">
+                            </div>
+                            <div class="activity-content">
+                                <h3>২১ ফেব্রুয়ারি</h3>
+                                <p>প্রকৃতির কাছাকাছি থেকে জীবন দক্ষতা শেখার জন্য
+                                    নিয়মিত ক্যাম্পিং ও রোভিং কার্যক্রম পরিচালনা
+                                    করা
+                                    হয়।</p>
+                            </div>
+                        </div></a>
+                    <a
+                        href="https://www.facebook.com/mpirover/posts/pfbid02jmAbQ6L3JTbsXHTTBqfvoqigB3udsuWDwHmN3xTKsHma5WMh4QkbSW8e2yfRYSdpl"
+                        target="_blank">
+                        <div class="activity-card">
+                            <div class="activity-img">
+                                <img src="{% static 'images/activities/বৃক্ষ.jpg' %}"
+                                    alt="বৃক্ষ">
+                            </div>
+                            <div class="activity-content">
+                                <h3>বৃক্ষরোপণ কর্মসূচি</h3>
+                                <p>আসুন, আমরা সকলে মিলে পৃথিবীটাকে যেমন পেয়েছি
+                                    তার চেয়ে আরও সুন্দর ও সবুজ করে রেখে যাওয়ার
+                                    প্রতিশ্রুতি নিই।</p>
+                            </div>
+                        </div></a>
+                    <a
+                        href="https://www.facebook.com/mpirover/posts/pfbid08eHik82XsWXWHm7xUDFYHdV3ejM7LLs1oGJVFX2VxADCJKwoiqA6cHmMTZP2V7mSl">
+                        <div class="activity-card">
+                            <div class="activity-img">
+                                <img src="{% static 'images/activities/নববর্ষ.jpg'%}"
+                                    alt="নববর্ষ">
+                            </div>
+                            <div class="activity-content">
+                                <h3>পহেলা বৈশাখ</h3>
+                                <p>নতুন বছরের নতুন প্রভাতে আমরা গর্বিত আমাদের
+                                    ঐতিহ্য ও সংস্কৃতিকে ধারণ করে এগিয়ে যাওয়ার
+                                    অঙ্গীকারে</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+        {% include 'footer.html'%}
+
+        <script src="{% static 'js/main.js' %}"></script>
+    </body>
+</html>

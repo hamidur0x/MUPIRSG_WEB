@@ -1,0 +1,59 @@
+
+{% load static %}
+<header>
+        <div class="container header-container">
+            <a href="{%url 'HomePage'%}" class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="MUPIRSG Logo">
+                <div class="logo-text">
+                    <h1>মুন্সীগঞ্জ পলিটেকনিক ইন্সটিটিউট</h1>
+                    <p><b>রোভার স্কাউট গ্রুপ</b></p>
+                </div>
+            </a>
+            <nav>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul>
+                    <li><a href="{% url 'HomePage'%}">হোম</a></li>
+                    <li><a href="{% url 'AboutPage'%}">আমাদের সম্পর্কে</a></li>
+                    <li><a href="{%url 'ActivitiesPAge'%}">কার্যক্রম</a></li>
+
+                    <li class="dropdown">
+                        <a href="#">ক্রু কাউন্সিল <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="{% url 'CurrentCouncilPage'%}">বর্তমান
+                                    ক্রু কাউন্সিল</a></li>
+                            <li><a href="{% url 'CrewCouncilPage'%}">সকল ক্রু
+                                    কাউন্সিল</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#">গ্যালারি <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-content">
+                            <li><a href="{% url 'CrewImgPage'%}">ক্রু মিটিং
+                                    এর ছবি সমূহ</a></li>
+                            <li><a href="{%url 'EventPage'%}">সকল কার্যক্রমের
+                                    ছবি সমূহ</a></li>
+                            <li><a href="{%url 'HikingImgPage'%}">হাইকিং এর
+                                    ছবি সমূহ</a></li>
+                            <li><a href="{% url 'MutPage'%}">রোভার মুটের ছবি
+                                    সমূহ</a></li>
+                            <li><a href="{%url 'DikkhaImgPage'%}">দীক্ষা
+                                    অনুষ্ঠানের ছবি সমূহ</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{%url 'ContactPage'%}">যোগাযোগ</a></li>
+
+                    <li class="dropdown">
+                        <a href="#">রিসোর্স <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-content">
+                            <!-- <li><a href="pages/badges.html">ব্যাজ সমূহ</a></li> -->
+                            <li><a href="{%url 'BookPage'%}">বই সমূহ </a></li>
+                            <!-- <li><a href="pages/links.html">লিঙ্ক</a></li> -->
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>

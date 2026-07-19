@@ -1,0 +1,192 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="bn">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>যোগাযোগ - মুন্সীগঞ্জ পলিটেকনিক রোভার স্কাউট</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{%static 'style.css'%}">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+    <body>
+        <!-- Header Section -->
+
+{% include 'nav.html'%}
+        <!-- Page Hero -->
+        <section class="hero">
+            <div class="container">
+                <h2>যোগাযোগ করুন</h2>
+                <p>আমাদের সাথে যোগাযোগ করতে নিচের ফর্মটি ব্যবহার করুন</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section contact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>আমাদের সাথে যোগাযোগ</h2>
+                </div>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>ঠিকানা</h3>
+                                <p>মুন্সীগঞ্জ পলিটেকনিক ইন্সটিটিউট<br>কমলাঘাট,
+                                    মিরকাদিম, মুন্সীগঞ্জ</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>ফোন</h3>
+                                <p>+৮৮০১৭XX-XXXXXX<br>+৮৮০১৯XX-XXXXXX</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>ইমেইল</h3>
+                                <p>emni@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>কার্যকালীন সময়</h3>
+                                <p>শনিবার - বৃহস্পতিবার<br>সকাল ৯:০০ - বিকাল
+                                    ৫:০০</p>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contact-form"
+                            action="mailto:hamidurrahman0705@gmail.com"
+                            method="post" enctype="text/plain">
+                            <div class="form-group">
+                                <label for="name">আপনার নাম</label>
+                                <input type="text" id="name" name="name"
+                                    class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">ইমেইল ঠিকানা</label>
+                                <input type="email" id="email" name="email"
+                                    class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">ফোন নম্বর</label>
+                                <input type="tel" id="phone" name="phone"
+                                    class="form-control" pattern="[0-9]{11}"
+                                    placeholder="01XXXXXXXXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">বিষয়</label>
+                                <select id="subject" name="subject"
+                                    class="form-control" required>
+                                    <option value>বিষয় নির্বাচন করুন</option>
+                                    <option value="membership">সদস্যতা
+                                        সম্পর্কিত</option>
+                                    <option value="activity">কার্যক্রম
+                                        সম্পর্কিত</option>
+                                    <option
+                                        value="volunteer">স্বেচ্ছাসেবক</option>
+                                    <option value="donation">অনুদান</option>
+                                    <option value="other">অন্যান্য</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">বার্তা</label>
+                                <textarea id="message" name="message"
+                                    class="form-control" required
+                                    placeholder="আপনার বার্তাটি এখানে লিখুন..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-block">বার্তা
+                                পাঠান</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>আমাদের অবস্থান</h2>
+                </div>
+                <div
+                    style="width: 100%; height: 400px; background-color: #f5f5f5; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.9833412530884!2d90.4833072760832!3d23.5690417787946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755afd4fdfaf20d%3A0x6cf0a23eb7ac2445!2sMunshiganj%20Polytechnic%20Institute!5e0!3m2!1sen!2sbd!4v1759649131738!5m2!1sen!2sbd"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section activities">
+            <div class="container">
+                <div class="section-title">
+                    <h2>সচরাচর জিজ্ঞাসা</h2>
+                </div>
+                <div class="events-timeline">
+                    <div class="event-item">
+                        <h3>কিভাবে সদস্য হব?</h3>
+                        <p>আমাদের সাথে যুক্ত হতে চাইলে আপনাকে অবশ্যই মুন্সীগঞ্জ
+                            পলিটেকনিক ইন্সটিটিউটের শিক্ষার্থী হতে হবে। এরপর
+                            আমাদের অফিসে এসে আবেদন ফর্ম পূরণ করতে হবে এবং একটি
+                            সাক্ষাৎকারে অংশ নিতে হবে।</p>
+                    </div>
+                    <div class="event-item">
+                        <h3>সদস্য হওয়ার জন্য কি কোন ফি দিতে হয়?</h3>
+                        <p>হ্যাঁ, আমাদের প্রতি ক্রু-মিনিং এ ফি রয়েছে যা বিভিন্ন
+                            কার্যক্রম পরিচালনায় ব্যবহৃত হয়। তবে আর্থিক সমস্যা
+                            থাকলে বিশেষ বিবেচনা করা হয়।</p>
+                    </div>
+                    <div class="event-item">
+                        <h3>আমি কি স্বেচ্ছাসেবক হিসেবে কাজ করতে পারি?</h3>
+                        <p>হ্যাঁ, আমাদের বিভিন্ন সামাজিক কার্যক্রমে স্বেচ্ছাসেবক
+                            হিসেবে অংশ নিতে পারেন। এর জন্য আপনাকে আমাদের সাথে
+                            যোগাযোগ করে আপনার আগ্রহের বিষয় জানাতে হবে।</p>
+                    </div>
+                    <div class="event-item">
+                        <h3>কার্যক্রমের সময়সূচী কিভাবে জানব?</h3>
+                        <p>আমাদের সকল কার্যক্রমের সময়সূচী ওয়েবসাইটে প্রকাশ করা
+                            হয়। এছাড়াও আমাদের ফেসবুক পেজে নিয়মিত আপডেট পাওয়া
+                            যাবে।</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        {%include 'footer.html'%}
+
+
+<script src="{% static 'js/main.js'}"></script>
+
+</body>
+</html>

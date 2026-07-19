@@ -1,0 +1,519 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="bn">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>সকল ক্রু কাউন্সিল - মুন্সীগঞ্জ পলিটেকনিক রোভার স্কাউট</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <style>
+            @media (max-width: 768px) {
+    .hero {
+        padding: 80px 0; /* Even smaller padding on very small screens */
+        min-height: 50vh;
+        background-attachment: scroll; /* Essential for mobile */
+    }
+    
+    .hero h2 {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+    
+    /* Ensure background image covers properly on mobile */
+    .hero {
+        background-size: cover;
+        background-position: center center;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        padding: 60px 0;
+        min-height: 40vh;
+    }
+    
+    .hero h2 {
+        font-size: 1.6rem;
+    }
+    
+    .hero p {
+        font-size: 0.95rem;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+        font-size: 0.95rem;
+    }
+}
+
+/* For very small devices */
+@media (max-width: 375px) {
+    .hero {
+        padding: 50px 0;
+        min-height: 35vh;
+    }
+    
+    .hero h2 {
+        font-size: 1.4rem;
+    }
+}
+        </style>
+    </head>
+    <body class="council-page">
+        <!-- Header Section -->
+{% include 'nav.html'%}
+        <!-- Page Hero -->
+        <section class="hero" id="hero"
+            style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{%static 'images/2.jpg'%}');">
+            <div class="container">
+                <h2 id="council-name">সকল ক্রু কাউন্সিল</h2>
+                <p id="council-year">আমাদের স্কাউট গ্রুপের ইতিহাসের সকল ক্রু কাউন্সিলের
+                    সদস্যগণ</p>
+            </div>
+        </section>
+        <!-- Crew Council Introduction -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>ক্রু কাউন্সিল সম্পর্কে</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>ক্রু কাউন্সিল কি?</h3>
+                        <p>ক্রু কাউন্সিল রোভার স্কাউট ইউনিটের একটি গুরুত্বপূর্ণ পরিচালনাকারী কমিটি, যেখানে সাধারণত অভিজ্ঞ ও দায়িত্বশীল রোভার সদস্যরা অন্তর্ভুক্ত থাকে। এই কাউন্সিল পুরো রোভার ক্রুর কার্যক্রম পরিকল্পনা, সংগঠন ও বাস্তবায়নের দায়িত্ব পালন করে। তারা বার্ষিক ও মাসিক কার্যক্রমের পরিকল্পনা তৈরি করে, ক্যাম্প, সেবা কার্যক্রম এবং প্রশিক্ষণ কর্মসূচির মতো গুরুত্বপূর্ণ সিদ্ধান্ত গ্রহণ করে। পাশাপাশি ক্রুর অভ্যন্তরীণ শৃঙ্খলা বজায় রাখা, সদস্যদের মধ্যে দায়িত্ব বণ্টন করা এবং নতুন রোভারদের সঠিক দিকনির্দেশনা দেওয়ার কাজও এই কাউন্সিল করে থাকে। গ্রুপ স্কাউটার বা রোভার লিডারের সাথে সমন্বয় রেখে ক্রুর উন্নয়ন ও সুষ্ঠু পরিচালনা নিশ্চিত করাই ক্রু কাউন্সিলের মূল উদ্দেশ্য।
+</p>
+                        <p>ক্রু কাউন্সিলের সদস্যগণ নির্বাচিত হন এবং তারা বিভিন্ন
+                            দায়িত্ব পালন করেন যেমন: আল এস আর এম, আল আর এম, এবং
+                            অন্যান্য গুরুত্বপূর্ণ পদে।</p>
+                        <h3>ক্রু কাউন্সিলের দায়িত্ব</h3>
+                        <ul>
+                            <li>গ্রুপের বার্ষিক পরিকল্পনা প্রণয়ন</li>
+                            <li>কার্যক্রম বাস্তবায়ন ও মনিটরিং</li>
+                            <li>সদস্যদের প্রশিক্ষণ ব্যবস্থাপনা</li>
+                            <li>বাজেট প্রণয়ন ও তহবিল ব্যবস্থাপনা</li>
+                            <li>বাহ্যিক সংস্থার সাথে সমন্বয়</li>
+                        </ul>
+                    </div>
+                    <div class="about-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+                            alt="ক্রু কাউন্সিল">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabs Navigation -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>সকল ক্রু কাউন্সিল</h2>
+                    <p>নিচের ট্যাব থেকে যেকোনো ক্রু কাউন্সিল নির্বাচন করুন</p>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loadingState" class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>ক্রু কাউন্সিল ডেটা লোড হচ্ছে...</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="errorState" class="error" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>ডেটা লোড করতে সমস্যা হচ্ছে</h3>
+                    <p>দয়া করে পরে আবার চেষ্টা করুন</p>
+                </div>
+
+                <div class="tabs" id="councilTabs" style="display: none;">
+                    <!-- Tabs will be generated by JavaScript -->
+                </div>
+
+                <div id="councilContainer" style="display: none;">
+                    <!-- Council content will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Election Process -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>ক্রু কাউন্সিল নির্বাচন প্রক্রিয়া</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>নির্বাচন পদ্ধতি</h3>
+                        <p>ক্রু কাউন্সিলের সদস্যগণ গণতান্ত্রিক
+                            পদ্ধতিতে নির্বাচিত হন। নির্বাচন প্রক্রিয়া সম্পূর্ণ
+                            স্বচ্ছ ও নিয়মমাফিক পরিচালিত হয়।</p>
+
+                        <h4>নির্বাচনের ধাপসমূহ:</h4>
+                        <ol>
+                            <li>মনোনয়ন জমা</li>
+                            <li>প্রার্থীদের উপস্থাপনা</li>
+                            <li>ভোটগ্রহণ</li>
+                            <li>ফলাফল ঘোষণা</li>
+                            <li>দায়িত্ব হস্তান্তর</li>
+                        </ol>
+
+                        <h4>যোগ্যতা:</h4>
+                        <ul>
+                            <li>সক্রিয় রোভার স্কাউট সদস্য হতে হবে</li>
+                            <li>ন্যূনতম ১ বছর অভিজ্ঞতা</li>
+                            <li>নেতৃত্বের গুণাবলী থাকতে হবে</li>
+                            <li>শৃঙ্খলাবোধ ও দায়িত্বশীলতা</li>
+                            <li>সফল ভাবে মেট কোর্স করা থাকতে হবে</li>
+                        </ul>
+                    </div>
+                    <div class="about-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1551135049-8a33b42738b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+                            alt="নির্বাচন প্রক্রিয়া">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+         {% include 'footer.html'%}
+
+    <script>// Django Static URL
+const STATIC_URL = "{% static '' %}";
+
+// Cache settings
+const CACHE_KEY = "councilDataCache";
+const CACHE_VERSION_KEY = "councilDataCacheVersion";
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours, adjust as needed
+
+// Convert JSON image path to Django static URL
+function imageUrl(path) {
+  if (!path) return STATIC_URL + "images/default-avatar.png";
+
+  if (
+    path.startsWith("http://") ||
+    path.startsWith("https://") ||
+    path.startsWith("/static/")
+  ) {
+    return path;
+  }
+
+  path = path.replace(/^(\.\.\/)+/, "");
+  path = path.replace(/^\.?\//, "");
+
+  return STATIC_URL + path;
+}
+
+// Global variable to store council data
+let councilData = [];
+// Track which councils have already been rendered into the DOM
+const renderedCouncils = new Set();
+
+// Try to read a valid cached copy of the JSON
+function getCachedData() {
+  try {
+    const cached = sessionStorage.getItem(CACHE_KEY);
+    const cachedAt = sessionStorage.getItem(CACHE_VERSION_KEY);
+
+    if (!cached || !cachedAt) return null;
+
+    const age = Date.now() - Number(cachedAt);
+    if (age > CACHE_TTL_MS) return null;
+
+    return JSON.parse(cached);
+  } catch (e) {
+    console.warn("Cache read failed, ignoring cache", e);
+    return null;
+  }
+}
+
+function setCachedData(data) {
+  try {
+    sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+    sessionStorage.setItem(CACHE_VERSION_KEY, String(Date.now()));
+  } catch (e) {
+    console.warn("Cache write failed (storage full/disabled)", e);
+  }
+}
+
+// Load JSON
+async function loadCouncilData() {
+  try {
+    let data = getCachedData();
+
+    if (data) {
+      councilData = data.councils || [];
+    } else {
+      const response = await fetch("{% static 'data/council-data.json' %}");
+
+      if (!response.ok) {
+        throw new Error("Unable to load JSON");
+      }
+
+      data = await response.json();
+      councilData = data.councils || [];
+      setCachedData(data);
+    }
+
+    document.getElementById("errorState").style.display = "none";
+
+    document.getElementById("loadingState").style.display = "none";
+    document.getElementById("councilTabs").style.display = "flex";
+    document.getElementById("councilContainer").style.display = "block";
+
+    initializePage();
+  } catch (error) {
+    console.error(error);
+
+    document.getElementById("loadingState").style.display = "none";
+    document.getElementById("councilTabs").style.display = "none";
+    document.getElementById("councilContainer").style.display = "none";
+    document.getElementById("errorState").style.display = "block";
+  }
+}
+
+function initializePage() {
+  const tabsContainer = document.getElementById("councilTabs");
+  const councilContainer = document.getElementById("councilContainer");
+
+  tabsContainer.innerHTML = "";
+  councilContainer.innerHTML = "";
+  renderedCouncils.clear();
+
+  let firstValidCouncil = null;
+
+  // Only create lightweight tab buttons + empty containers upfront.
+  // Actual HTML (with images) is built lazily on first view.
+  councilData.forEach((council, index) => {
+    if (!council || !council.id) {
+      console.warn(`Skipping council at index ${index}: missing id`, council);
+      return;
+    }
+
+    const isFirst = firstValidCouncil === null;
+
+    const tabBtn = document.createElement("button");
+    tabBtn.className = `tab-btn ${isFirst ? "active" : ""}`;
+    tabBtn.textContent = council.name || `Council ${index + 1}`;
+    tabBtn.dataset.council = council.id;
+    tabsContainer.appendChild(tabBtn);
+
+    const councilDiv = document.createElement("div");
+    councilDiv.className = `council-container ${isFirst ? "active" : ""}`;
+    councilDiv.id = `council-${council.id}`;
+    // Placeholder until it's actually shown
+    councilDiv.innerHTML = `<div class="council-loading">লোড হচ্ছে...</div>`;
+    councilContainer.appendChild(councilDiv);
+
+    if (isFirst) firstValidCouncil = council;
+  });
+
+  // Render the first tab immediately since it's visible right away
+  if (firstValidCouncil) {
+    renderCouncil(firstValidCouncil);
+  }
+
+  document.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      document
+        .querySelectorAll(".tab-btn")
+        .forEach((b) => b.classList.remove("active"));
+      document
+        .querySelectorAll(".council-container")
+        .forEach((c) => c.classList.remove("active"));
+
+      this.classList.add("active");
+
+      const councilId = this.dataset.council;
+      const targetPanel = document.getElementById(`council-${councilId}`);
+
+      if (!targetPanel) {
+        console.error(`No panel found for council id: ${councilId}`);
+        return;
+      }
+
+      targetPanel.classList.add("active");
+
+      // Lazy render: build this council's HTML only the first time it's opened
+      if (!renderedCouncils.has(councilId)) {
+        const council = councilData.find((c) => String(c.id) === String(councilId));
+        if (council) renderCouncil(council);
+      }
+    });
+  });
+
+  setupCouncilNavigation();
+}
+
+function renderCouncil(council) {
+  try {
+    const councilDiv = document.getElementById(`council-${council.id}`);
+    if (!councilDiv) return;
+
+    councilDiv.innerHTML = generateCouncilHTML(council);
+    renderedCouncils.add(String(council.id));
+
+    // Re-attach nav buttons since innerHTML wipe removed old listeners
+    setupCouncilNavigation();
+  } catch (e) {
+    console.error(`Failed to render council ${council.id}:`, council, e);
+    const councilDiv = document.getElementById(`council-${council.id}`);
+    if (councilDiv) {
+      councilDiv.innerHTML = `<div class="council-error">এই কাউন্সিলের তথ্য লোড করা যায়নি</div>`;
+    }
+  }
+}
+
+function setupCouncilNavigation() {
+  document.querySelectorAll(".council-container").forEach((container) => {
+    if (container.querySelector(".council-navigation")) return;
+
+    const nav = document.createElement("div");
+    nav.className = "council-navigation";
+
+    const prev = document.createElement("button");
+    prev.className = "prev-btn";
+    prev.textContent = "Previous";
+
+    const next = document.createElement("button");
+    next.className = "next-btn";
+    next.textContent = "Next";
+
+    nav.appendChild(prev);
+    nav.appendChild(next);
+
+    container.appendChild(nav);
+  });
+
+  document.querySelectorAll(".prev-btn").forEach((btn) => {
+    btn.onclick = () => navigateCouncil("prev");
+  });
+
+  document.querySelectorAll(".next-btn").forEach((btn) => {
+    btn.onclick = () => navigateCouncil("next");
+  });
+}
+
+function navigateCouncil(direction) {
+  const tabs = [...document.querySelectorAll(".tab-btn")];
+
+  if (tabs.length === 0) return;
+
+  const active = document.querySelector(".tab-btn.active");
+
+  let index = tabs.indexOf(active);
+  if (index === -1) index = 0;
+
+  if (direction === "prev")
+    index = (index - 1 + tabs.length) % tabs.length;
+  else index = (index + 1) % tabs.length;
+
+  tabs[index].click();
+}
+
+function generateCouncilHTML(council) {
+  const seniorRover = council.seniorRover || {};
+
+  return `
+  <div class="council-title">
+      <h2>${council.name || ""}</h2>
+      ${council.year ? `<p class="council-year">${council.year}</p>` : ""}
+  </div>
+
+  <div class="team-grid-top">
+
+      <div class="team-member-top">
+
+          <div class="member-img">
+              <img
+                  src="${imageUrl(seniorRover.image)}"
+                  alt="${seniorRover.name || ""}"
+                  loading="lazy"
+                  onerror="this.src='${STATIC_URL}images/default-avatar.png'">
+          </div>
+
+          <div class="member-info">
+              <h3>${seniorRover.name || "N/A"}</h3>
+              <p class="member-role">সিনিয়র রোভার মেট</p>
+              <p>ডিপার্টমেন্ট: ${seniorRover.department || "N/A"}</p>
+              <p>উপদল: ${seniorRover.subgroup || "N/A"}</p>
+          </div>
+
+      </div>
+
+  </div>
+
+  <div class="team-grid">
+
+      ${(council.roverMates || [])
+        .map(
+          (mate) => `
+
+      <div class="team-member">
+
+          <div class="member-img">
+              <img
+                  src="${imageUrl(mate.image)}"
+                  alt="${mate.name || ""}"
+                  loading="lazy"
+                  onerror="this.src='${STATIC_URL}images/default-avatar.png'">
+          </div>
+
+          <div class="member-info">
+              <h3>${mate.name || "N/A"}</h3>
+              <p class="member-role">রোভার মেট</p>
+              <p>ডিপার্টমেন্ট: ${mate.department || "N/A"}</p>
+              <p>উপদল: ${mate.subgroup || "N/A"}</p>
+          </div>
+
+      </div>
+
+      `,
+        )
+        .join("")}
+
+  </div>
+
+  <div class="team-grid">
+
+      ${(council.assistantRoverMates || [])
+        .map(
+          (mate) => `
+
+      <div class="team-member">
+
+          <div class="member-img">
+              <img
+                  src="${imageUrl(mate.image)}"
+                  alt="${mate.name || ""}"
+                  loading="lazy"
+                  onerror="this.src='${STATIC_URL}images/default-avatar.png'">
+          </div>
+
+          <div class="member-info">
+              <h3>${mate.name || "N/A"}</h3>
+              <p class="member-role">সহকারী রোভার মেট</p>
+              <p>ডিপার্টমেন্ট: ${mate.department || "N/A"}</p>
+              <p>উপদল: ${mate.subgroup || "N/A"}</p>
+          </div>
+
+      </div>
+
+      `,
+        )
+        .join("")}
+
+  </div>
+  `;
+}
+
+document.addEventListener("DOMContentLoaded", loadCouncilData);</script>
+    <script src="{% static 'js/main.js' %}"></script>
+    </body>
+</html>

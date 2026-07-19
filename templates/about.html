@@ -1,0 +1,175 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমাদের সম্পর্কে - মুন্সীগঞ্জ পলিটেকনিক রোভার স্কাউট</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+
+    <style>
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0;
+                /* Even smaller padding on very small screens */
+                min-height: 50vh;
+                background-attachment: scroll;
+                /* Essential for mobile */
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+                margin-bottom: 12px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+
+            /* Ensure background image covers properly on mobile */
+            .hero {
+                background-size: cover;
+                background-position: center center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 60px 0;
+                min-height: 40vh;
+            }
+
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* For very small devices */
+        @media (max-width: 375px) {
+            .hero {
+                padding: 50px 0;
+                min-height: 35vh;
+            }
+
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'nav.html'%}
+
+    <!-- Page Hero -->
+    <section class="hero"
+        style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{%static 'images/image1.jpg'%}');">
+        <div class="container">
+            <h2>আমাদের সম্পর্কে</h2>
+            <p>মুন্সীগঞ্জ পলিটেকনিক ইন্সটিটিউট রোভার স্কাউট গ্রুপের ইতিহাস,
+                লক্ষ্য ও উদ্দেশ্য</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>আমাদের ইতিহাস</h3>
+                    <p>মুন্সীগঞ্জ পলিটেকনিক ইন্সটিটিউট রোভার স্কাউট গ্রুপ
+                        N/A সালে প্রতিষ্ঠিত হয়। প্রতিষ্ঠালগ্ন থেকে আমরা
+                        তরুণদের মধ্যে দেশপ্রেম, স্বেচ্ছাসেবা, এবং নেতৃত্বের
+                        গুণাবলী বিকাশে কাজ করে আসছি।</p>
+                    <p>প্রথমদিকে মাত্র N/A জন সদস্য নিয়ে যাত্রা শুরু করলেও
+                        আজ আমাদের সদস্য সংখ্যা N/A এ পৌঁছেছে। আমরা বিভিন্ন
+                        সামাজিক কার্যক্রম, স্বেচ্ছাসেবামূলক কাজ, এবং
+                        শিক্ষামূলক প্রোগ্রামের মাধ্যমে আমাদের সদস্যদের
+                        দক্ষতা উন্নয়নে কাজ করি।</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+                        alt="আমাদের ইতিহাস">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Vision Section -->
+    <section class="section activities">
+        <div class="container">
+            <div class="section-title">
+                <h2>আমাদের লক্ষ্য ও উদ্দেশ্য</h2>
+            </div>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-icon" style="text-align: center; padding: 20px; color: var(--primary);">
+                        <i class="fas fa-bullseye" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h3>আমাদের মিশন</h3>
+                        <p> স্কাউট আন্দোলনের উদ্দেশ্য হল ছেলে মেয়েদের শারীরিক, বুদ্ধিবৃত্তিক, সামাজিক আধ্যাত্মিক ও
+                            মানসিক দিকগুলো পরিপূর্ণ অন্তর্নিহিত ক্ষমতা বিকাশে অবদান রাখা যাতে করে তারা ভারসাম্যপূর্ণ
+                            ব্যক্তি, দায়িত্বশীল নাগরিক এবং স্থানীয়, জাতীয় ও আন্তর্জাতিক সম্প্রদায়ের সদস্য হিসাবে
+                            জীবনযাপন করতে পারে।</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon" style="text-align: center; padding: 20px; color: var(--primary);">
+                        <i class="fas fa-eye" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h3>আমাদের ভিশন</h3>
+                        <p>স্কাউট প্রতিজ্ঞা ও আইনের মূল্যবোধের ওপর ভিত্তি করে তরুণদের শারীরিক, মানসিক, নৈতিক, এবং
+                            সামাজিকভাবে উন্নত করে এমন একটি বিশ্ব তৈরি করা, যেখানে তারা নিজেদের জীবনে আত্মতৃপ্তি খুঁজে
+                            পায় এবং সমাজে গঠনমূলক ভূমিকা পালন করে</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon" style="text-align: center; padding: 20px; color: var(--primary);">
+                        <i class="fas fa-handshake" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h3>আমাদের পদ্ধতি</h3>
+                        <p style="text-align: left;">১। প্রতিজ্ঞা ও আইনের চর্চা এবং তার প্রতিফলন। <br>
+                            ২। হাতে-কলমে শিক্ষা <br>
+                            ৩। ছোট ছোট দলের সদস্য হিসেবে কাজ করা (যেমন- ষষ্ঠক/উপদল পদ্ধতি) <br>
+                            ৪। ক্রমোন্নতিশীল ও উদ্দীপনামূলক বিভিন্ন কার্যক্রম (ব্যাজ পদ্ধতি) <br>
+                            ৫। বয়স্ক নেতার সহায়তা<br>
+                            ৬। প্রকৃতি পর্যবেক্ষণ<br>
+                            ৭। প্রতিকী কাঠামো</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon" style="text-align: center; padding: 20px; color: var(--primary);">
+                        <i class="fa-solid fa-heart" style="font-size: 3rem;"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h3>আমাদের মূল্যবোধ</h3>
+                        <p>১। স্রষ্টার প্রতি কর্তব্য পালন (আধ্যাত্মিক দিক)। <br>
+                            ২। নিজের প্রতি কর্তব্য পালন (ব্যক্তিগত দিক)।<br>
+                            ৩। অপরের প্রতি কর্তব্য পালন (সামাজিক দিক)।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% include 'footer.html'%}
+
+    <script src="{% static 'js/main.js' %}" defer></script>
+</body>
+
+</html>

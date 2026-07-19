@@ -1,0 +1,88 @@
+{
+  "name": "বর্তমান ক্রু কাউন্সিল",
+  "year": "২০২৪-বর্তমান",
+  "seniorRover": {
+        "name": "মোঃ মুসফিকুর রহমান রাতুল",
+        "department": "মেকানিক্যাল",
+        "session": "২১-২২",
+        "mobile": "০১৬০৮৪২৫৯৩৫",
+        "responsibility": "সিনিয়র রোভার মেট",
+        "subgroup": "বিশ্বাসী",
+        "facebook": "https://www.facebook.com/musfiqur461",
+        "image": "images/15/srm.png"
+      },
+      "roverMates": [
+        {
+          "name": "মোঃ নূরে আলম রাসেল",
+          "department": "ইলেক্ট্রনিক্সি",
+          "session": "২১-২২",
+          "mobile": "০১৩০৯৪২২১৮৫",
+          "responsibility": "রোভার মেট",
+          "subgroup": "বন্ধু",
+          "facebook": "https://www.facebook.com/rh.rasel.3382",
+          "image": "images/15/2rm.png"
+        },
+        {
+          "name": "মাজহারুল আমিন",
+          "department": "ইলেক্ট্রোমেডিক্যাল",
+          "session": "২১-২২",
+          "mobile": "০১৭৪৬৪১৭০৪৭",
+          "responsibility": "রোভার মেট",
+          "subgroup": "বিনয়ী",
+          "facebook": "https://www.facebook.com/profile.php?id=100088580513061",
+          "image": "images/15/3rm.png"
+        },
+        {
+          "name": "সিফাত মিয়া",
+          "department": "ইলেকট্রিক্যাল",
+          "session": "২১-২২",
+          "mobile": "০১৯৬৮৬৩৭৫২৬",
+          "responsibility": "রোভার মেট",
+          "subgroup": "সদয়",
+          "facebook": "https://www.facebook.com/sifat.mia.9638",
+          "image": "images/15/4rm.png"
+        }
+      ],
+      "assistantRoverMates": [
+        {
+          "name": "ফয়সাল খান অমিত",
+          "department": "ইলেকট্রিক্যাল",
+          "session": "২২-২৩",
+          "mobile": "০১৮২৩৩৫৬৪১০",
+          "responsibility": "সহকারি রোভার মেট",
+          "subgroup": "বিশ্বাসী",
+          "facebook": "https://www.facebook.com/profile.php?id=100089926736261",
+          "image": "images/15/1arm.png"
+        },
+        {
+          "name": "শিহাব রানা",
+          "department": "কম্পিউটার",
+          "session": "২২-২৩",
+          "mobile": "০১৬২৯৬৫৯১০৯",
+          "responsibility": "সহকারি রোভার মেট",
+          "subgroup": "বন্ধু",
+          "facebook": "https://www.facebook.com/J.M.Seamuzzaman",
+          "image": "images/15/2arm.jpg"
+        },
+        {
+          "name": "আলী ইফতিয়ার সাইম",
+          "department": "ইলেকট্রিক্যাল",
+          "session": "২২-২৩",
+          "mobile": "০১৭৮৯০৬০০৩৩",
+          "responsibility": "সহকারি রোভার মেট",
+          "subgroup": "বিনয়ী",
+          "facebook": "https://www.facebook.com/eftear.saeem.abr/",
+          "image": "images/15/3arm.png"
+        },
+        {
+          "name": "শাহাবর হোসেন রিফাত",
+          "department": "কম্পিউটার",
+          "session": "২২-২৩",
+          "mobile": "০১৯২৩০৮৮৫০১",
+          "responsibility": "সহকারি রোভার মেট",
+          "subgroup": "সদয়",
+          "facebook": "https://www.facebook.com/ShahRiffy",
+          "image": "images/15/4arm.png"
+        }
+  ]
+}
