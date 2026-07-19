@@ -282,21 +282,21 @@ function pdfUrl(path) {
     return STATIC_URL + path;
 }
 
-let galleryData = { pdf: [] };
 
-async function loadGalleryData() {
+let galleryData = { pdf: {{ pdf_data_json|safe }} };
+
+function loadGalleryData() {
     try {
-        const res = await fetch("{% static 'data/pdf-data.json' %}", {
-            cache: "no-cache"
-        });
-
-        if (!res.ok) throw new Error("Cannot load JSON");
-
-        galleryData = await res.json();
-
         if (!galleryData.pdf) galleryData.pdf = [];
 
         document.getElementById("loadingState").style.display = "none";
+
+        if (galleryData.pdf.length === 0) {
+            document.getElementById("errorState").style.display = "block";
+            document.getElementById("errorState").querySelector("p").textContent = "কোনো PDF পাওয়া যায়নি।";
+            return;
+        }
+
         document.getElementById("imageGallerySection").style.display = "block";
 
         buildGallery();
@@ -332,10 +332,10 @@ function buildGallery() {
                     <p>${item.alt}</p>
                 </div>
 
-                <div class="pdf-actions">
+                {% comment %} <div class="pdf-actions">
                     <button class="pdf-action-btn view-pdf">
                         <i class="fas fa-eye"></i> দেখুন
-                    </button>
+                    </button> {% endcomment %}
 
                     <button class="pdf-action-btn download-pdf">
                         <i class="fas fa-download"></i> ডাউনলোড
@@ -363,7 +363,7 @@ function enableLightbox() {
 
         if (!fileData) return;
 
-        const pdfFile = pdfUrl(fileData.url);
+        const pdfFile = fileData.url;
 
         if (e.target.closest(".view-pdf")) {
 
@@ -445,6 +445,7 @@ function enableLightbox() {
 document.addEventListener("DOMContentLoaded", function () {
     loadGalleryData();
 });
+
 </script>   
 </body>
 </html>

@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'HomePage',
+    'activities',
+    'aboutpage',
+    'bookpage',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +124,5 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = (BASE_DIR / "static",)
 
 STATIC_ROOT = BASE_DIR / "staticfiles"  # For production
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
