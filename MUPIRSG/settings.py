@@ -42,6 +42,13 @@ INSTALLED_APPS = [
     'activities',
     'aboutpage',
     'bookpage',
+    'crewgallery',
+    'dikkhagallery',
+    'hikinggallery',
+    'mutgallery',
+    'eventgallery',
+    'contactpage',
+    'councilpage',
 ]
 
 MIDDLEWARE = [

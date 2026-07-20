@@ -7,10 +7,8 @@
         <title>যোগাযোগ - মুন্সীগঞ্জ পলিটেকনিক রোভার স্কাউট</title>
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{%static 'style.css'%}">
-    
-    <link rel="stylesheet" href="css/style.css">
-</head>
+        <link rel="stylesheet" href="{%static 'style.css'%}">
+    </head>
     <body>
         <!-- Header Section -->
 
@@ -18,8 +16,8 @@
         <!-- Page Hero -->
         <section class="hero">
             <div class="container">
-                <h2>যোগাযোগ করুন</h2>
-                <p>আমাদের সাথে যোগাযোগ করতে নিচের ফর্মটি ব্যবহার করুন</p>
+                <h2>{{ contact_info.hero_title }}</h2>
+                <p>{{ contact_info.hero_description }}</p>
             </div>
         </section>
 
@@ -37,8 +35,7 @@
                             </div>
                             <div class="contact-details">
                                 <h3>ঠিকানা</h3>
-                                <p>মুন্সীগঞ্জ পলিটেকনিক ইন্সটিটিউট<br>কমলাঘাট,
-                                    মিরকাদিম, মুন্সীগঞ্জ</p>
+                                <p>{{ contact_info.address|linebreaksbr }}</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -47,7 +44,7 @@
                             </div>
                             <div class="contact-details">
                                 <h3>ফোন</h3>
-                                <p>+৮৮০১৭XX-XXXXXX<br>+৮৮০১৯XX-XXXXXX</p>
+                                <p>{{ contact_info.phone_one }}<br>{{ contact_info.phone_two }}</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -56,7 +53,7 @@
                             </div>
                             <div class="contact-details">
                                 <h3>ইমেইল</h3>
-                                <p>emni@gmail.com</p>
+                                <p>{{ contact_info.email }}</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -64,21 +61,19 @@
                                 <i class="fas fa-clock"></i>
                             </div>
                             <div class="contact-details">
-                                <h3>কার্যকালীন সময়</h3>
-                                <p>শনিবার - বৃহস্পতিবার<br>সকাল ৯:০০ - বিকাল
-                                    ৫:০০</p>
+                                <h3>কার্যকালীন সময়</h3>
+                                <p>{{ contact_info.working_hours }}</p>
                             </div>
                         </div>
                         <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            {% for link in social_links %}
+                            <a href="{{ link.url }}" target="_blank"><i class="{{ link.icon_class }}"></i></a>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="contact-form">
                         <form id="contact-form"
-                            action="mailto:hamidurrahman0705@gmail.com"
+                            action="mailto:{{ contact_info.form_submit_email }}"
                             method="post" enctype="text/plain">
                             <div class="form-group">
                                 <label for="name">আপনার নাম</label>
@@ -97,10 +92,10 @@
                                     placeholder="01XXXXXXXXX" required>
                             </div>
                             <div class="form-group">
-                                <label for="subject">বিষয়</label>
+                                <label for="subject">বিষয়</label>
                                 <select id="subject" name="subject"
                                     class="form-control" required>
-                                    <option value>বিষয় নির্বাচন করুন</option>
+                                    <option value>বিষয় নির্বাচন করুন</option>
                                     <option value="membership">সদস্যতা
                                         সম্পর্কিত</option>
                                     <option value="activity">কার্যক্রম
@@ -126,6 +121,7 @@
         </section>
 
         <!-- Map Section -->
+        {% if contact_info.map_embed_url %}
         <section class="section">
             <div class="container">
                 <div class="section-title">
@@ -134,7 +130,7 @@
                 <div
                     style="width: 100%; height: 400px; background-color: #f5f5f5; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.9833412530884!2d90.4833072760832!3d23.5690417787946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755afd4fdfaf20d%3A0x6cf0a23eb7ac2445!2sMunshiganj%20Polytechnic%20Institute!5e0!3m2!1sen!2sbd!4v1759649131738!5m2!1sen!2sbd"
+                        src="{{ contact_info.map_embed_url }}"
                         width="100%"
                         height="100%"
                         style="border:0;"
@@ -145,6 +141,7 @@
                 </div>
             </div>
         </section>
+        {% endif %}
 
         <!-- FAQ Section -->
         <section class="section activities">
@@ -153,31 +150,14 @@
                     <h2>সচরাচর জিজ্ঞাসা</h2>
                 </div>
                 <div class="events-timeline">
+                    {% for faq in faqs %}
                     <div class="event-item">
-                        <h3>কিভাবে সদস্য হব?</h3>
-                        <p>আমাদের সাথে যুক্ত হতে চাইলে আপনাকে অবশ্যই মুন্সীগঞ্জ
-                            পলিটেকনিক ইন্সটিটিউটের শিক্ষার্থী হতে হবে। এরপর
-                            আমাদের অফিসে এসে আবেদন ফর্ম পূরণ করতে হবে এবং একটি
-                            সাক্ষাৎকারে অংশ নিতে হবে।</p>
+                        <h3>{{ faq.question }}</h3>
+                        <p>{{ faq.answer }}</p>
                     </div>
-                    <div class="event-item">
-                        <h3>সদস্য হওয়ার জন্য কি কোন ফি দিতে হয়?</h3>
-                        <p>হ্যাঁ, আমাদের প্রতি ক্রু-মিনিং এ ফি রয়েছে যা বিভিন্ন
-                            কার্যক্রম পরিচালনায় ব্যবহৃত হয়। তবে আর্থিক সমস্যা
-                            থাকলে বিশেষ বিবেচনা করা হয়।</p>
-                    </div>
-                    <div class="event-item">
-                        <h3>আমি কি স্বেচ্ছাসেবক হিসেবে কাজ করতে পারি?</h3>
-                        <p>হ্যাঁ, আমাদের বিভিন্ন সামাজিক কার্যক্রমে স্বেচ্ছাসেবক
-                            হিসেবে অংশ নিতে পারেন। এর জন্য আপনাকে আমাদের সাথে
-                            যোগাযোগ করে আপনার আগ্রহের বিষয় জানাতে হবে।</p>
-                    </div>
-                    <div class="event-item">
-                        <h3>কার্যক্রমের সময়সূচী কিভাবে জানব?</h3>
-                        <p>আমাদের সকল কার্যক্রমের সময়সূচী ওয়েবসাইটে প্রকাশ করা
-                            হয়। এছাড়াও আমাদের ফেসবুক পেজে নিয়মিত আপডেট পাওয়া
-                            যাবে।</p>
-                    </div>
+                    {% empty %}
+                    <p>কোনো প্রশ্ন পাওয়া যায়নি।</p>
+                    {% endfor %}
                 </div>
             </div>
         </section>
@@ -186,7 +166,7 @@
         {%include 'footer.html'%}
 
 
-<script src="{% static 'js/main.js'}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 
 </body>
 </html>

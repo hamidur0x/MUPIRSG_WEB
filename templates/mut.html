@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{%static 'style.css'%}">
 
-    <!-- Only Lightbox CSS (no additional styling) -->
     <style>
-        /* ===== Lightbox Styles ===== */
         .lightbox {
             position: fixed;
             top: 0;
@@ -54,9 +52,8 @@
             font-size: 18px;
         }
 
-        /* ===== Hero Section Padding Fix ===== */
         .hero .container {
-            padding-top: 30px; /* move text closer to top */
+            padding-top: 30px;
             padding-bottom: 60px;
             text-align: center;
             color: white;
@@ -68,65 +65,58 @@
 
 {% include 'nav.html'%}
 
-<section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('{%static 'images/7.jpg'%}');">
+{% if hero %}
+<section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url('{{ hero.image.url }}');">
     <div class="container">
-        <h2>রোভার মুট</h2>
-        <p>রোভার স্কাউট কার্যক্রমের স্মৃতি</p>
+        <h2>{{ hero.title }}</h2>
+        <p>{{ hero.description }}</p>
     </div>
 </section>
+{% endif %}
 
 <section class="section">
     <div class="container">
 
-        <!-- Loading -->
         <div id="loadingState" class="loading">
             <i class="fas fa-spinner fa-spin"></i>
             <p>গ্যালারি লোড হচ্ছে...</p>
         </div>
 
-        <!-- Error -->
         <div id="errorState" class="error-message" style="display:none;">
             <i class="fas fa-exclamation-circle"></i>
-            <p>ডেটা লোড করতে সমস্যা হয়েছে।</p>
+            <p>ডেটা লোড করতে সমস্যা হয়েছে।</p>
         </div>
     </div>
 </section>
 
-<!-- ✅ ONLY IMAGE GALLERY -->
 <section class="section" id="imageGallerySection" style="display:none;">
     <div class="container">
         <div class="section-title">
             <h2>ছবি গ্যালারি</h2>
-            <p>মোট <span id="imageCount">0</span> টি ছবি</p>
+
         </div>
 
         <div class="gallery-grid" id="imageGallery"></div>
     </div>
 </section>
 
-<!-- Footer -->
-        
-
 {%include 'footer.html'%}
 
 
-<script src="{% static 'js/main.js'}"></script>
+<script src="{% static 'js/main.js'%}"></script>
 
-
-<!-- ✅ SCRIPT: Only Image Gallery (JSON) -->
 
 <script>
-    // Django Static URL
     const STATIC_URL = "{% static '' %}";
 
-    // Convert JSON image path to Django static URL
     function imageUrl(path) {
         if (!path) return STATIC_URL + "images/default-image.png";
 
         if (
             path.startsWith("http://") ||
             path.startsWith("https://") ||
-            path.startsWith("/static/")
+            path.startsWith("/static/") ||
+            path.startsWith("/media/")
         ) {
             return path;
         }
@@ -139,6 +129,7 @@
 
     let galleryData = {};
     let lightboxInitialized = false;
+    const newImagesData = {{ new_images_json|safe }};
 
     async function loadGalleryData() {
         try {
@@ -149,6 +140,11 @@
             }
 
             galleryData = await response.json();
+
+            if (!galleryData.images) galleryData.images = [];
+
+            // New DB images shown FIRST, old JSON images after
+            galleryData.images = newImagesData.concat(galleryData.images);
 
             buildGallery();
 
