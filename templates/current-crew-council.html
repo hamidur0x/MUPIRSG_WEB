@@ -13,9 +13,9 @@
     <style>
       @media (max-width: 768px) {
         .hero {
-          padding: 80px 0; /* Even smaller padding on very small screens */
+          padding: 80px 0;
           min-height: 50vh;
-          background-attachment: scroll; /* Essential for mobile */
+          background-attachment: scroll;
         }
 
         .hero h2 {
@@ -28,7 +28,6 @@
           margin-bottom: 25px;
         }
 
-        /* Ensure background image covers properly on mobile */
         .hero {
           background-size: cover;
           background-position: center center;
@@ -55,7 +54,6 @@
         }
       }
 
-      /* For very small devices */
       @media (max-width: 375px) {
         .hero {
           padding: 50px 0;
@@ -107,79 +105,35 @@
       </div>
     </section>
 
-    <!-- <section class="section activities">
-            <div class="container">
-                <div class="section-title">
-                    <h2>বর্তমান কাউন্সিলের অর্জন</h2>
-                </div>
-                <div class="activities-grid">
-                    <div class="activity-card">
-                        <div class="activity-icon"
-                            style="text-align: center; padding: 20px; color: var(--primary);">
-                            <i class="fas fa-users"
-                                style="font-size: 3rem;"></i>
-                        </div>
-                        <div class="activity-content">
-                            <h3>সদস্য সংখ্যা বৃদ্ধি</h3>
-                            <p>বর্তমান কাউন্সিলের সময়ে N/A নতুন সদস্য সংযুক্তি,
-                                যা গ্রুপের ইতিহাসে সর্বোচ্চ।</p>
-                        </div>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-icon"
-                            style="text-align: center; padding: 20px; color: var(--primary);">
-                            <i class="fas fa-tree" style="font-size: 3rem;"></i>
-                        </div>
-                        <div class="activity-content">
-                            <h3>পরিবেশ সুরক্ষা</h3>
-                            <p>N/A বৃক্ষরোপণ এবং ক্যাম্পাসে প্লাস্টিক মুক্ত
-                                অভিযান সফলভাবে সম্পন্ন।</p>
-                        </div>
-                    </div>
-                    <div class="activity-card">
-                        <div class="activity-icon"
-                            style="text-align: center; padding: 20px; color: var(--primary);">
-                            <i class="fas fa-trophy"
-                                style="font-size: 3rem;"></i>
-                        </div>
-                        <div class="activity-content">
-                            <h3>প্রতিযোগিতায় সাফল্য</h3>
-                            <p>N/A</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
     {% include 'footer.html' %}
 
     <!-- Script -->
     <script>
-      document.addEventListener("DOMContentLoaded", async () => {
+      document.addEventListener("DOMContentLoaded", () => {
         try {
-          const response = await fetch(
-            "{% static 'data/current-council.json' %}",
-          );
+          const data = {{ council_json|safe }};
 
-          if (!response.ok) {
-            throw new Error("Failed to load JSON: " + response.status);
+          if (!data || Object.keys(data).length === 0) {
+            document.getElementById("council-name").textContent = "কোনো কাউন্সিল পাওয়া যায়নি";
+            document.getElementById("council-year").textContent = "";
+            return;
           }
 
-          const data = await response.json();
-
           // Base static URL
-          const STATIC_URL = "/static/";
+          const STATIC_URL = "{% static '' %}";
 
-          // Convert relative image path to static URL
+          // Convert relative image path to static/media URL
           function imageUrl(path) {
             if (!path) return "";
 
-            // Already absolute
-            if (path.startsWith("http") || path.startsWith("/static/")) {
+            if (
+              path.startsWith("http") ||
+              path.startsWith("/static/") ||
+              path.startsWith("/media/")
+            ) {
               return path;
             }
 
-            // Remove ../ or ./
             path = path.replace(/^(\.\.\/)+/, "");
             path = path.replace(/^\.?\//, "");
 
@@ -187,23 +141,23 @@
           }
 
           // Hero
-          document.getElementById("council-name").textContent = data.name;
+          document.getElementById("council-name").textContent = data.name || "";
           document.getElementById("council-year").textContent =
-            `${data.year} শিক্ষাবর্ষের নির্বাচিত ক্রু কাউন্সিল সদস্যগণ`;
+            `${data.year || ""} শিক্ষাবর্ষের নির্বাচিত ক্রু কাউন্সিল সদস্যগণ`;
 
           // Senior Rover
-          const senior = data.seniorRover;
+          const senior = data.seniorRover || {};
 
           document.getElementById("senior-rover").innerHTML = `
             <div class="team-member-top">
                 <div class="member-img">
-                    <img src="${imageUrl(senior.image)}" alt="${senior.name}">
+                    <img src="${imageUrl(senior.image)}" alt="${senior.name || ''}">
                 </div>
                 <div class="member-info">
-                    <h3>${senior.name}</h3>
-                    <p class="member-role" style="color:#c1121f;">${senior.responsibility}</p>
-                    <p>ডিপার্টমেন্ট: ${senior.department}</p>
-                    <p>উপদল: ${senior.subgroup}</p>
+                    <h3>${senior.name || 'N/A'}</h3>
+                    <p class="member-role" style="color:#c1121f;">${senior.responsibility || ''}</p>
+                    <p>ডিপার্টমেন্ট: ${senior.department || 'N/A'}</p>
+                    <p>উপদল: ${senior.subgroup || 'N/A'}</p>
                 </div>
             </div>
         `;
@@ -249,26 +203,6 @@
             `,
             )
             .join("");
-
-          // Achievements (optional)
-          if (data.achievements && document.getElementById("achievements")) {
-            document.getElementById("achievements").innerHTML =
-              data.achievements
-                .map(
-                  (act) => `
-                    <div class="activity-card">
-                        <div class="activity-icon">
-                            <i class="${act.icon}"></i>
-                        </div>
-                        <div class="activity-content">
-                            <h3>${act.title}</h3>
-                            <p>${act.description}</p>
-                        </div>
-                    </div>
-                `,
-                )
-                .join("");
-          }
         } catch (err) {
           console.error(err);
         }

@@ -11,6 +11,11 @@
     />
     <link rel="stylesheet" href="{% static 'style.css' %}" />
     <style>
+      .hero {
+        background-image:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url("{% static 'images/2.jpg' %}");
+}
       @media (max-width: 768px) {
         .hero {
           padding: 80px 0; /* Even smaller padding on very small screens */
@@ -75,11 +80,6 @@
     <section
       class="hero"
       id="hero"
-      style="
-        background-image:
-          linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-          url('{%static 'images/2.jpg'%}'');
-      "
     >
       <div class="container">
         <h2 id="council-name">সকল ক্রু কাউন্সিল</h2>
@@ -211,344 +211,344 @@
     {% include 'footer.html'%}
 
     <script>
-        // Django Static URL
-const STATIC_URL = "{% static '' %}";
+              // Django Static URL
+      const STATIC_URL = "{% static '' %}";
 
-// Cache settings
-const CACHE_KEY = "councilDataCache";
-const CACHE_VERSION_KEY = "councilDataCacheVersion";
-const CACHE_COUNT_KEY = "councilDataDBCount"; // tracks how many DB councils existed at cache time
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes instead of 24 hours
+      // Cache settings
+      const CACHE_KEY = "councilDataCache";
+      const CACHE_VERSION_KEY = "councilDataCacheVersion";
+      const CACHE_COUNT_KEY = "councilDataDBCount"; // tracks how many DB councils existed at cache time
+      const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes instead of 24 hours
 
-// Convert JSON image path to Django static/media URL
-function imageUrl(path) {
-  if (!path) return STATIC_URL + "images/default-avatar.png";
+      // Convert JSON image path to Django static/media URL
+      function imageUrl(path) {
+        if (!path) return STATIC_URL + "images/default-avatar.png";
 
-  if (
-    path.startsWith("http://") ||
-    path.startsWith("https://") ||
-    path.startsWith("/static/") ||
-    path.startsWith("/media/")
-  ) {
-    return path;
-  }
+        if (
+          path.startsWith("http://") ||
+          path.startsWith("https://") ||
+          path.startsWith("/static/") ||
+          path.startsWith("/media/")
+        ) {
+          return path;
+        }
 
-  path = path.replace(/^(\.\.\/)+/, "");
-  path = path.replace(/^\.?\//, "");
+        path = path.replace(/^(\.\.\/)+/, "");
+        path = path.replace(/^\.?\//, "");
 
-  return STATIC_URL + path;
-}
-
-// Global variable to store council data
-let councilData = [];
-// Track which councils have already been rendered into the DOM
-const renderedCouncils = new Set();
-
-// New councils coming from Django DB (admin-added) — always fresh from server
-const newCouncilFromDB = {{ new_council_json|safe }};
-
-// Try to read a valid cached copy of the OLD static JSON only
-function getCachedData() {
-  try {
-    const cached = sessionStorage.getItem(CACHE_KEY);
-    const cachedAt = sessionStorage.getItem(CACHE_VERSION_KEY);
-    const cachedCount = sessionStorage.getItem(CACHE_COUNT_KEY);
-
-    if (!cached || !cachedAt) return null;
-
-    const age = Date.now() - Number(cachedAt);
-    if (age > CACHE_TTL_MS) return null;
-
-    // If the number of DB councils has changed since caching, force a refresh
-    if (Number(cachedCount) !== newCouncilFromDB.length) return null;
-
-    return JSON.parse(cached);
-  } catch (e) {
-    console.warn("Cache read failed, ignoring cache", e);
-    return null;
-  }
-}
-
-function setCachedData(data) {
-  try {
-    sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
-    sessionStorage.setItem(CACHE_VERSION_KEY, String(Date.now()));
-    sessionStorage.setItem(CACHE_COUNT_KEY, String(newCouncilFromDB.length));
-  } catch (e) {
-    console.warn("Cache write failed (storage full/disabled)", e);
-  }
-}
-
-// Load JSON + merge with DB data
-async function loadCouncilData() {
-  try {
-    let data = getCachedData();
-
-    if (data) {
-      councilData = data.councils || [];
-    } else {
-      const response = await fetch("{% static 'data/council-data.json' %}");
-
-      if (!response.ok) {
-        throw new Error("Unable to load JSON");
+        return STATIC_URL + path;
       }
 
-      data = await response.json();
-      councilData = data.councils || [];
-      setCachedData(data);
-    }
+      // Global variable to store council data
+      let councilData = [];
+      // Track which councils have already been rendered into the DOM
+      const renderedCouncils = new Set();
 
-    // Merge: new DB councils shown first, old JSON councils after
-    // এখন (নতুন শেষে যোগ হবে):
-councilData = councilData.concat(newCouncilFromDB);
+      // New councils coming from Django DB (admin-added) — always fresh from server
+      const newCouncilFromDB = {{ new_council_json|safe }};
 
-    document.getElementById("errorState").style.display = "none";
+      // Try to read a valid cached copy of the OLD static JSON only
+      function getCachedData() {
+        try {
+          const cached = sessionStorage.getItem(CACHE_KEY);
+          const cachedAt = sessionStorage.getItem(CACHE_VERSION_KEY);
+          const cachedCount = sessionStorage.getItem(CACHE_COUNT_KEY);
 
-    document.getElementById("loadingState").style.display = "none";
-    document.getElementById("councilTabs").style.display = "flex";
-    document.getElementById("councilContainer").style.display = "block";
+          if (!cached || !cachedAt) return null;
 
-    initializePage();
-  } catch (error) {
-    console.error(error);
+          const age = Date.now() - Number(cachedAt);
+          if (age > CACHE_TTL_MS) return null;
 
-    document.getElementById("loadingState").style.display = "none";
-    document.getElementById("councilTabs").style.display = "none";
-    document.getElementById("councilContainer").style.display = "none";
-    document.getElementById("errorState").style.display = "block";
-  }
-}
+          // If the number of DB councils has changed since caching, force a refresh
+          if (Number(cachedCount) !== newCouncilFromDB.length) return null;
 
-function initializePage() {
-  const tabsContainer = document.getElementById("councilTabs");
-  const councilContainer = document.getElementById("councilContainer");
-
-  tabsContainer.innerHTML = "";
-  councilContainer.innerHTML = "";
-  renderedCouncils.clear();
-
-  let firstValidCouncil = null;
-
-  councilData.forEach((council, index) => {
-    if (!council || !council.id) {
-      console.warn(`Skipping council at index ${index}: missing id`, council);
-      return;
-    }
-
-    const isFirst = firstValidCouncil === null;
-
-    const tabBtn = document.createElement("button");
-    tabBtn.className = `tab-btn ${isFirst ? "active" : ""}`;
-    tabBtn.textContent = council.name || `Council ${index + 1}`;
-    tabBtn.dataset.council = council.id;
-    tabsContainer.appendChild(tabBtn);
-
-    const councilDiv = document.createElement("div");
-    councilDiv.className = `council-container ${isFirst ? "active" : ""}`;
-    councilDiv.id = `council-${council.id}`;
-    councilDiv.innerHTML = `<div class="council-loading">লোড হচ্ছে...</div>`;
-    councilContainer.appendChild(councilDiv);
-
-    if (isFirst) firstValidCouncil = council;
-  });
-
-  if (firstValidCouncil) {
-    renderCouncil(firstValidCouncil);
-  }
-
-  document.querySelectorAll(".tab-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      document
-        .querySelectorAll(".tab-btn")
-        .forEach((b) => b.classList.remove("active"));
-      document
-        .querySelectorAll(".council-container")
-        .forEach((c) => c.classList.remove("active"));
-
-      this.classList.add("active");
-
-      const councilId = this.dataset.council;
-      const targetPanel = document.getElementById(`council-${councilId}`);
-
-      if (!targetPanel) {
-        console.error(`No panel found for council id: ${councilId}`);
-        return;
+          return JSON.parse(cached);
+        } catch (e) {
+          console.warn("Cache read failed, ignoring cache", e);
+          return null;
+        }
       }
 
-      targetPanel.classList.add("active");
-
-      if (!renderedCouncils.has(councilId)) {
-        const council = councilData.find((c) => String(c.id) === String(councilId));
-        if (council) renderCouncil(council);
+      function setCachedData(data) {
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+          sessionStorage.setItem(CACHE_VERSION_KEY, String(Date.now()));
+          sessionStorage.setItem(CACHE_COUNT_KEY, String(newCouncilFromDB.length));
+        } catch (e) {
+          console.warn("Cache write failed (storage full/disabled)", e);
+        }
       }
-    });
-  });
 
-  setupCouncilNavigation();
-}
+      // Load JSON + merge with DB data
+      async function loadCouncilData() {
+        try {
+          let data = getCachedData();
 
-function renderCouncil(council) {
-  try {
-    const councilDiv = document.getElementById(`council-${council.id}`);
-    if (!councilDiv) return;
+          if (data) {
+            councilData = data.councils || [];
+          } else {
+            const response = await fetch("{% static 'data/council-data.json' %}");
 
-    councilDiv.innerHTML = generateCouncilHTML(council);
-    renderedCouncils.add(String(council.id));
+            if (!response.ok) {
+              throw new Error("Unable to load JSON");
+            }
 
-    setupCouncilNavigation();
-  } catch (e) {
-    console.error(`Failed to render council ${council.id}:`, council, e);
-    const councilDiv = document.getElementById(`council-${council.id}`);
-    if (councilDiv) {
-      councilDiv.innerHTML = `<div class="council-error">এই কাউন্সিলের তথ্য লোড করা যায়নি</div>`;
-    }
-  }
-}
+            data = await response.json();
+            councilData = data.councils || [];
+            setCachedData(data);
+          }
 
-function setupCouncilNavigation() {
-  document.querySelectorAll(".council-container").forEach((container) => {
-    if (container.querySelector(".council-navigation")) return;
+          // Merge: new DB councils shown first, old JSON councils after
+          // এখন (নতুন শেষে যোগ হবে):
+      councilData = councilData.concat(newCouncilFromDB);
 
-    const nav = document.createElement("div");
-    nav.className = "council-navigation";
+          document.getElementById("errorState").style.display = "none";
 
-    const prev = document.createElement("button");
-    prev.className = "prev-btn";
-    prev.textContent = "Previous";
+          document.getElementById("loadingState").style.display = "none";
+          document.getElementById("councilTabs").style.display = "flex";
+          document.getElementById("councilContainer").style.display = "block";
 
-    const next = document.createElement("button");
-    next.className = "next-btn";
-    next.textContent = "Next";
+          initializePage();
+        } catch (error) {
+          console.error(error);
 
-    nav.appendChild(prev);
-    nav.appendChild(next);
+          document.getElementById("loadingState").style.display = "none";
+          document.getElementById("councilTabs").style.display = "none";
+          document.getElementById("councilContainer").style.display = "none";
+          document.getElementById("errorState").style.display = "block";
+        }
+      }
 
-    container.appendChild(nav);
-  });
+      function initializePage() {
+        const tabsContainer = document.getElementById("councilTabs");
+        const councilContainer = document.getElementById("councilContainer");
 
-  document.querySelectorAll(".prev-btn").forEach((btn) => {
-    btn.onclick = () => navigateCouncil("prev");
-  });
+        tabsContainer.innerHTML = "";
+        councilContainer.innerHTML = "";
+        renderedCouncils.clear();
 
-  document.querySelectorAll(".next-btn").forEach((btn) => {
-    btn.onclick = () => navigateCouncil("next");
-  });
-}
+        let firstValidCouncil = null;
 
-function navigateCouncil(direction) {
-  const tabs = [...document.querySelectorAll(".tab-btn")];
+        councilData.forEach((council, index) => {
+          if (!council || !council.id) {
+            console.warn(`Skipping council at index ${index}: missing id`, council);
+            return;
+          }
 
-  if (tabs.length === 0) return;
+          const isFirst = firstValidCouncil === null;
 
-  const active = document.querySelector(".tab-btn.active");
+          const tabBtn = document.createElement("button");
+          tabBtn.className = `tab-btn ${isFirst ? "active" : ""}`;
+          tabBtn.textContent = council.name || `Council ${index + 1}`;
+          tabBtn.dataset.council = council.id;
+          tabsContainer.appendChild(tabBtn);
 
-  let index = tabs.indexOf(active);
-  if (index === -1) index = 0;
+          const councilDiv = document.createElement("div");
+          councilDiv.className = `council-container ${isFirst ? "active" : ""}`;
+          councilDiv.id = `council-${council.id}`;
+          councilDiv.innerHTML = `<div class="council-loading">লোড হচ্ছে...</div>`;
+          councilContainer.appendChild(councilDiv);
 
-  if (direction === "prev")
-    index = (index - 1 + tabs.length) % tabs.length;
-  else index = (index + 1) % tabs.length;
+          if (isFirst) firstValidCouncil = council;
+        });
 
-  tabs[index].click();
-}
+        if (firstValidCouncil) {
+          renderCouncil(firstValidCouncil);
+        }
 
-function generateCouncilHTML(council) {
-  const seniorRover = council.seniorRover || {};
+        document.querySelectorAll(".tab-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            document
+              .querySelectorAll(".tab-btn")
+              .forEach((b) => b.classList.remove("active"));
+            document
+              .querySelectorAll(".council-container")
+              .forEach((c) => c.classList.remove("active"));
 
-  return `
-  <div class="council-title">
-      <h2>${council.name || ""}</h2>
-      ${council.year ? `<p class="council-year">${council.year}</p>` : ""}
-  </div>
+            this.classList.add("active");
 
-  <div class="team-grid-top">
+            const councilId = this.dataset.council;
+            const targetPanel = document.getElementById(`council-${councilId}`);
 
-      <div class="team-member-top">
+            if (!targetPanel) {
+              console.error(`No panel found for council id: ${councilId}`);
+              return;
+            }
 
-          <div class="member-img">
-              <img
-                  src="${imageUrl(seniorRover.image)}"
-                  alt="${seniorRover.name || ""}"
-                  loading="lazy"
-                  onerror="this.src='${STATIC_URL}images/default-avatar.png'">
-          </div>
+            targetPanel.classList.add("active");
 
-          <div class="member-info">
-              <h3>${seniorRover.name || "N/A"}</h3>
-              <p class="member-role">সিনিয়র রোভার মেট</p>
-              <p>ডিপার্টমেন্ট: ${seniorRover.department || "N/A"}</p>
-              <p>উপদল: ${seniorRover.subgroup || "N/A"}</p>
-          </div>
+            if (!renderedCouncils.has(councilId)) {
+              const council = councilData.find((c) => String(c.id) === String(councilId));
+              if (council) renderCouncil(council);
+            }
+          });
+        });
 
-      </div>
+        setupCouncilNavigation();
+      }
 
-  </div>
+      function renderCouncil(council) {
+        try {
+          const councilDiv = document.getElementById(`council-${council.id}`);
+          if (!councilDiv) return;
 
-  <div class="team-grid">
+          councilDiv.innerHTML = generateCouncilHTML(council);
+          renderedCouncils.add(String(council.id));
 
-      ${(council.roverMates || [])
-        .map(
-          (mate) => `
+          setupCouncilNavigation();
+        } catch (e) {
+          console.error(`Failed to render council ${council.id}:`, council, e);
+          const councilDiv = document.getElementById(`council-${council.id}`);
+          if (councilDiv) {
+            councilDiv.innerHTML = `<div class="council-error">এই কাউন্সিলের তথ্য লোড করা যায়নি</div>`;
+          }
+        }
+      }
 
-      <div class="team-member">
+      function setupCouncilNavigation() {
+        document.querySelectorAll(".council-container").forEach((container) => {
+          if (container.querySelector(".council-navigation")) return;
 
-          <div class="member-img">
-              <img
-                  src="${imageUrl(mate.image)}"
-                  alt="${mate.name || ""}"
-                  loading="lazy"
-                  onerror="this.src='${STATIC_URL}images/default-avatar.png'">
-          </div>
+          const nav = document.createElement("div");
+          nav.className = "council-navigation";
 
-          <div class="member-info">
-              <h3>${mate.name || "N/A"}</h3>
-              <p class="member-role">রোভার মেট</p>
-              <p>ডিপার্টমেন্ট: ${mate.department || "N/A"}</p>
-              <p>উপদল: ${mate.subgroup || "N/A"}</p>
-          </div>
+          const prev = document.createElement("button");
+          prev.className = "prev-btn";
+          prev.textContent = "Previous";
 
-      </div>
+          const next = document.createElement("button");
+          next.className = "next-btn";
+          next.textContent = "Next";
 
-      `,
-        )
-        .join("")}
+          nav.appendChild(prev);
+          nav.appendChild(next);
 
-  </div>
+          container.appendChild(nav);
+        });
 
-  <div class="team-grid">
+        document.querySelectorAll(".prev-btn").forEach((btn) => {
+          btn.onclick = () => navigateCouncil("prev");
+        });
 
-      ${(council.assistantRoverMates || [])
-        .map(
-          (mate) => `
+        document.querySelectorAll(".next-btn").forEach((btn) => {
+          btn.onclick = () => navigateCouncil("next");
+        });
+      }
 
-      <div class="team-member">
+      function navigateCouncil(direction) {
+        const tabs = [...document.querySelectorAll(".tab-btn")];
 
-          <div class="member-img">
-              <img
-                  src="${imageUrl(mate.image)}"
-                  alt="${mate.name || ""}"
-                  loading="lazy"
-                  onerror="this.src='${STATIC_URL}images/default-avatar.png'">
-          </div>
+        if (tabs.length === 0) return;
 
-          <div class="member-info">
-              <h3>${mate.name || "N/A"}</h3>
-              <p class="member-role">সহকারী রোভার মেট</p>
-              <p>ডিপার্টমেন্ট: ${mate.department || "N/A"}</p>
-              <p>উপদল: ${mate.subgroup || "N/A"}</p>
-          </div>
+        const active = document.querySelector(".tab-btn.active");
 
-      </div>
+        let index = tabs.indexOf(active);
+        if (index === -1) index = 0;
 
-      `,
-        )
-        .join("")}
+        if (direction === "prev")
+          index = (index - 1 + tabs.length) % tabs.length;
+        else index = (index + 1) % tabs.length;
 
-  </div>
-  `;
-}
+        tabs[index].click();
+      }
 
-document.addEventListener("DOMContentLoaded", loadCouncilData);
+      function generateCouncilHTML(council) {
+        const seniorRover = council.seniorRover || {};
+
+        return `
+        <div class="council-title">
+            <h2>${council.name || ""}</h2>
+            ${council.year ? `<p class="council-year">${council.year}</p>` : ""}
+        </div>
+
+        <div class="team-grid-top">
+
+            <div class="team-member-top">
+
+                <div class="member-img">
+                    <img
+                        src="${imageUrl(seniorRover.image)}"
+                        alt="${seniorRover.name || ""}"
+                        loading="lazy"
+                        onerror="this.src='${STATIC_URL}images/default-avatar.png'">
+                </div>
+
+                <div class="member-info">
+                    <h3>${seniorRover.name || "N/A"}</h3>
+                    <p class="member-role">সিনিয়র রোভার মেট</p>
+                    <p>ডিপার্টমেন্ট: ${seniorRover.department || "N/A"}</p>
+                    <p>উপদল: ${seniorRover.subgroup || "N/A"}</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="team-grid">
+
+            ${(council.roverMates || [])
+              .map(
+                (mate) => `
+
+            <div class="team-member">
+
+                <div class="member-img">
+                    <img
+                        src="${imageUrl(mate.image)}"
+                        alt="${mate.name || ""}"
+                        loading="lazy"
+                        onerror="this.src='${STATIC_URL}images/default-avatar.png'">
+                </div>
+
+                <div class="member-info">
+                    <h3>${mate.name || "N/A"}</h3>
+                    <p class="member-role">রোভার মেট</p>
+                    <p>ডিপার্টমেন্ট: ${mate.department || "N/A"}</p>
+                    <p>উপদল: ${mate.subgroup || "N/A"}</p>
+                </div>
+
+            </div>
+
+            `,
+              )
+              .join("")}
+
+        </div>
+
+        <div class="team-grid">
+
+            ${(council.assistantRoverMates || [])
+              .map(
+                (mate) => `
+
+            <div class="team-member">
+
+                <div class="member-img">
+                    <img
+                        src="${imageUrl(mate.image)}"
+                        alt="${mate.name || ""}"
+                        loading="lazy"
+                        onerror="this.src='${STATIC_URL}images/default-avatar.png'">
+                </div>
+
+                <div class="member-info">
+                    <h3>${mate.name || "N/A"}</h3>
+                    <p class="member-role">সহকারী রোভার মেট</p>
+                    <p>ডিপার্টমেন্ট: ${mate.department || "N/A"}</p>
+                    <p>উপদল: ${mate.subgroup || "N/A"}</p>
+                </div>
+
+            </div>
+
+            `,
+              )
+              .join("")}
+
+        </div>
+        `;
+      }
+
+      document.addEventListener("DOMContentLoaded", loadCouncilData);
     </script>
     <script src="{% static 'js/main.js' %}"></script>
   </body>

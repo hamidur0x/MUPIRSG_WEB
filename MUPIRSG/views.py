@@ -49,8 +49,57 @@ def activities(request):
 
 
 def current_council(request):
-    return render(request, 'current-crew-council.html')
+    # সর্বশেষ যোগ করা active council (সবচেয়ে বড় order, তারপর সবচেয়ে নতুন created_at)
+    latest_council = (
+        Council.objects.filter(is_active=True)
+        .order_by("-order", "-created_at")
+        .prefetch_related("members")
+        .first()
+    )
 
+    council_data = {}
+
+    if latest_council:
+        members = latest_council.members.all()
+
+        senior = members.filter(role="senior_rover").first()
+        rover_mates = members.filter(role="rover_mate")
+        assistant_mates = members.filter(role="assistant_rover_mate")
+
+        council_data = {
+            "name": latest_council.name,
+            "year": latest_council.year,
+            "seniorRover": {
+                "name": senior.name,
+                "department": senior.department,
+                "subgroup": senior.subgroup,
+                "responsibility": "সিনিয়র রোভার মেট",
+                "image": senior.image.url if senior and senior.image else "",
+            } if senior else {},
+            "roverMates": [
+                {
+                    "name": m.name,
+                    "department": m.department,
+                    "subgroup": m.subgroup,
+                    "responsibility": "রোভার মেট",
+                    "image": m.image.url if m.image else "",
+                } for m in rover_mates
+            ],
+            "assistantRoverMates": [
+                {
+                    "name": m.name,
+                    "department": m.department,
+                    "subgroup": m.subgroup,
+                    "responsibility": "সহকারী রোভার মেট",
+                    "image": m.image.url if m.image else "",
+                } for m in assistant_mates
+            ],
+        }
+
+    context = {
+        "council_json": json.dumps(council_data),
+    }
+    return render(request, "current-crew-council.html", context)
 
 def crew_council(request):
     councils = Council.objects.filter(is_active=True).prefetch_related("members")

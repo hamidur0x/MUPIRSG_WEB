@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 
 
 def validate_image_size(image):
-    max_size_kb = 500
+    max_size_kb = 1500
     if image.size > max_size_kb * 1024:
         raise ValidationError(f"ছবির সাইজ {max_size_kb}KB-এর বেশি হতে পারবে না। বর্তমান সাইজ: {image.size // 1024}KB")
 
