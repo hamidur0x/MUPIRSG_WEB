@@ -1,0 +1,21 @@
+{
+    "images": [
+
+        { "url": "images/dikkha/16.jpg", "alt": "ছবি 16" },
+        { "url": "images/dikkha/15.jpg", "alt": "ছবি 15" },
+        { "url": "images/dikkha/14.jpg", "alt": "ছবি 14" },
+        { "url": "images/dikkha/13.jpg", "alt": "ছবি 13" },
+        { "url": "images/dikkha/12.jpg", "alt": "ছবি 12" },
+        { "url": "images/dikkha/11.avif", "alt": "ছবি 11" },
+        { "url": "images/dikkha/10.avif", "alt": "ছবি 10" },
+        { "url": "images/dikkha/9.avif", "alt": "ছবি 9" },
+        { "url": "images/dikkha/8.avif", "alt": "ছবি 8" },
+        { "url": "images/dikkha/7.avif", "alt": "ছবি 7" },
+        { "url": "images/dikkha/6.avif", "alt": "ছবি 6" },
+        { "url": "images/dikkha/5.avif", "alt": "ছবি 5" },
+        { "url": "images/dikkha/4.avif", "alt": "ছবি 4" },
+        { "url": "images/dikkha/3.avif", "alt": "ছবি 3" },
+        { "url": "images/dikkha/2.avif", "alt": "ছবি 2" },
+        { "url": "images/dikkha/1.jpg", "alt": "ছবি 1" }
+    ]
+}
