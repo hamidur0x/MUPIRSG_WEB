@@ -1,7 +1,6 @@
 /* ===== বাংলা ফন্ট ও বেসিক স্টাইল ===== */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&display=swap');
 
-
 /* ===== ENHANCED COLOR SCHEME & VARIABLES ===== */
 :root {
     --primary: #2C5530;
@@ -242,7 +241,7 @@ nav ul li a {
 
 /* ===== ENHANCED HERO SECTION ===== */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/HERO.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
