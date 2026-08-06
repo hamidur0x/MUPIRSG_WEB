@@ -192,11 +192,6 @@ nav ul li a {
     position: relative;
 }
 
-nav ul li a:hover {
-    background-color: rgba(44, 85, 48, 0.08);
-    color: var(--primary);
-    transform: translateY(-2px);
-}
 
 /* ===== Dropdown styles ===== */
 .dropdown-content {
