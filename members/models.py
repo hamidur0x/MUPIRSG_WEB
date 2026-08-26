@@ -55,7 +55,7 @@ class MemberProfile(models.Model):
 
     # --- Academic info ----------------------------------------------------
     student_id = models.CharField("Student ID / Roll Number", max_length=50, blank=True)
-    department = models.CharField(max_length=100, blank=True, db_index=True)
+    department = models.CharField("Upodol", max_length=100, blank=True, db_index=True)
     technology = models.CharField("Technology / Trade", max_length=100, blank=True)
     semester = models.CharField(max_length=20, blank=True)
     session = models.CharField(max_length=20, blank=True, db_index=True)
