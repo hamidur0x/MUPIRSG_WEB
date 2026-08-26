@@ -37,6 +37,8 @@ urlpatterns = [
     path('contact/',views.contact,name='ContactPage'),
     path('books/',views.book,name='BookPage'),
     path('members/', include('members.urls')),
+    path("health/", health_check, name="health"),
+
     
     
 ]

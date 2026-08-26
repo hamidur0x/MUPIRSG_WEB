@@ -12,7 +12,11 @@ from contactpage.models import ContactPage, SocialLink, FAQItem
 import json
 from councilpage.models import Council
 
+from django.http import HttpResponse
 
+
+def health_check(request):
+    return HttpResponse("OK")
 
 def Home(request):
     homepage = HomePage.objects.first()
