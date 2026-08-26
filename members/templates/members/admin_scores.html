@@ -1,0 +1,32 @@
+{% extends "members/base.html" %}
+{% block title %}Manage Scores{% endblock %}
+{% block content %}
+<h2>Manage Scores</h2>
+<a href="{% url 'members:admin_score_add' %}" class="btn btn-success mb-3">Add Points</a>
+<form method="get" class="row g-2 mb-3">
+  <div class="col-auto">{{ form.q }}</div>
+  <div class="col-auto">{{ form.category }}</div>
+  <div class="col-auto">{{ form.date_from }}</div>
+  <div class="col-auto">{{ form.date_to }}</div>
+  <div class="col-auto">{{ form.month }}</div>
+  <div class="col-auto">{{ form.year }}</div>
+  <div class="col-auto"><button class="btn btn-secondary">Filter</button></div>
+</form>
+<table class="table">
+  <thead><tr><th>Date</th><th>Member</th><th>BS ID</th><th>Category</th><th>Activity</th><th>Points</th><th>Added by</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for r in page_obj %}
+    <tr>
+      <td>{{ r.activity_date }}</td><td>{{ r.member.full_name }}</td><td>{{ r.member.bs_id }}</td>
+      <td>{{ r.category.name }}</td><td>{{ r.activity_name }}</td><td>{{ r.points }}</td><td>{{ r.added_by }}</td>
+      <td>
+        <a href="{% url 'members:admin_score_edit' r.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+        <form method="post" action="{% url 'members:admin_score_delete' r.pk %}" style="display:inline" onsubmit="return confirm('Delete this score record?');">
+          {% csrf_token %}<button class="btn btn-sm btn-outline-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

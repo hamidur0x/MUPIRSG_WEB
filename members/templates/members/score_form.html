@@ -1,0 +1,35 @@
+{% extends "members/base.html" %}
+{% block title %}{% if mode == "add" %}Add Score{% else %}Edit Score{% endif %}{% endblock %}
+{% block content %}
+<h2>{% if mode == "add" %}Add Points{% else %}Edit Score{% endif %}</h2>
+<form method="post">
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="mb-3">
+      <label class="form-label">{{ field.label }}</label>
+      {% if field.name == "member" %}
+        <input type="text" id="student_search" class="form-control mb-2"
+               placeholder="Search student by name or BS ID">
+      {% endif %}
+      {{ field }}
+      {% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}
+      {% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+    </div>
+  {% endfor %}
+  <button class="btn btn-primary">Save</button>
+</form>
+
+<script>
+document.getElementById('student_search').addEventListener('input', function () {
+  const term = this.value.trim().toLowerCase();
+  const select = document.getElementById('id_member_select');
+  let firstMatch = null;
+  for (const opt of select.options) {
+    const match = opt.text.toLowerCase().includes(term);
+    opt.hidden = !match && term.length > 0;
+    if (match && term.length > 0 && !firstMatch) firstMatch = opt;
+  }
+  if (firstMatch) select.value = firstMatch.value;
+});
+</script>
+{% endblock %}

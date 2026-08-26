@@ -19,7 +19,9 @@ from django.urls import path
 from MUPIRSG import views
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path( '', views.Home, name='HomePage'),
@@ -33,7 +35,8 @@ urlpatterns = [
     path('mut/',views.mut,name='MutPage'),
     path('dikkha_img/',views.dikkha_img, name='DikkhaImgPage'),
     path('contact/',views.contact,name='ContactPage'),
-    path('books/',views.book,name='BookPage')
+    path('books/',views.book,name='BookPage'),
+    path('members/', include('members.urls')),
     
     
 ]

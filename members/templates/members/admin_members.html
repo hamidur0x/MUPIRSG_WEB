@@ -1,0 +1,27 @@
+{% extends "members/base.html" %}
+{% block title %}Manage Members{% endblock %}
+{% block content %}
+<h2>Manage Members</h2>
+<form method="get" class="mb-3"><input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Search by name / BS ID / student ID"></form>
+<table class="table">
+  <thead><tr><th>Name</th><th>BS ID</th><th>Status</th><th>Points</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for m in page_obj %}
+    <tr>
+      <td>{{ m.full_name }}</td><td>{{ m.bs_id }}</td><td>{{ m.get_status_display }}</td>
+      <td>{{ m.total_points_annotated|default:0 }}</td>
+      <td>
+        <a href="{% url 'members:admin_member_edit' m.bs_id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+        <form method="post" action="{% url 'members:admin_member_status_change' m.bs_id %}" style="display:inline">
+          {% csrf_token %}
+          <select name="status" onchange="this.form.submit()" class="form-select form-select-sm d-inline w-auto">
+            <option value="current" {% if m.status == 'current' %}selected{% endif %}>Current Student</option>
+            <option value="passed_out" {% if m.status == 'passed_out' %}selected{% endif %}>Passed Out</option>
+          </select>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

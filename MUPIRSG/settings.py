@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'eventgallery',
     'contactpage',
     'councilpage',
+    'members',
 ]
 
 MIDDLEWARE = [
@@ -69,13 +70,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'MUPIRSG.wsgi.application'
 
 # --- Database: Render Postgres (free tier) via DATABASE_URL, fallback to sqlite locally ---
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-        ssl_require=not DEBUG,
-    )
-}
+DATABASE_URL = config('DATABASE_URL', default=None)
+
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=not DEBUG,
+        )
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -111,23 +122,8 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_SECONDS = 60 * 60 * 24 * 7
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    
-    
-    
-DATABASE_URL = config('DATABASE_URL', default=None)
 
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.parse(
-            DATABASE_URL,
-            conn_max_age=600,
-            ssl_require=True,
-        )
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+LOGIN_URL = 'members:login'
+LOGIN_REDIRECT_URL = 'members:dashboard'
+LOGOUT_REDIRECT_URL = 'members:login'
+MEMBERS_RANKING_SCOPE = 'current'

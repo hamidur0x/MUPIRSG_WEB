@@ -1,0 +1,18 @@
+{% extends "members/base.html" %}
+{% block title %}Reports{% endblock %}
+{% block content %}
+<h2>Reports</h2>
+<div class="row">
+  <div class="col-md-3"><div class="card p-3">Total Members<br><strong>{{ stats.total_members }}</strong></div></div>
+  <div class="col-md-3"><div class="card p-3">Current / Passed Out<br><strong>{{ stats.current_students }} / {{ stats.passed_out }}</strong></div></div>
+  <div class="col-md-3"><div class="card p-3">Total Points<br><strong>{{ stats.total_points }}</strong></div></div>
+  <div class="col-md-3"><div class="card p-3">Score Records<br><strong>{{ stats.total_score_records }}</strong></div></div>
+</div>
+<h4 class="mt-4">Points by category</h4>
+<table class="table">
+  <thead><tr><th>Category</th><th>Total Points</th><th>Entries</th></tr></thead>
+  <tbody>{% for row in points_by_category %}<tr><td>{{ row.category__name }}</td><td>{{ row.total }}</td><td>{{ row.count }}</td></tr>{% endfor %}</tbody>
+</table>
+<h4 class="mt-4">Top 10 ranking</h4>
+<ol>{% for entry in ranking_top10 %}<li>{{ entry.member.full_name }} - {{ entry.total_points }}</li>{% endfor %}</ol>
+{% endblock %}

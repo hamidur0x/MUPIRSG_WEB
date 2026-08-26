@@ -1,0 +1,18 @@
+{% extends "members/base.html" %}
+{% block title %}Ranking{% endblock %}
+{% block content %}
+<h2>Ranking</h2>
+<table class="table">
+  <thead><tr><th>Rank</th><th>Name</th><th>BS ID</th><th>Points</th></tr></thead>
+  <tbody>
+    {% for entry in ranking %}
+    <tr class="{% if entry.rank <= 3 %}table-warning{% endif %}">
+      <td>#{{ entry.rank }}</td>
+      <td><a href="{% url 'members:member_detail' entry.member.bs_id %}">{{ entry.member.full_name }}</a></td>
+      <td>{{ entry.member.bs_id }}</td>
+      <td>{{ entry.total_points }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

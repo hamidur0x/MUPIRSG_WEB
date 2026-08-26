@@ -1,0 +1,25 @@
+{% extends "members/base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<div class="row">
+  <div class="col-md-3"><div class="card p-3">Total Members<br><strong>{{ stats.total_members }}</strong></div></div>
+  <div class="col-md-3"><div class="card p-3">Current Students<br><strong>{{ stats.current_students }}</strong></div></div>
+  <div class="col-md-3"><div class="card p-3">Passed Out<br><strong>{{ stats.passed_out }}</strong></div></div>
+  <div class="col-md-3"><div class="card p-3">Total Points<br><strong>{{ stats.total_points }}</strong></div></div>
+  <div class="col-md-3"><div class="card p-3">Score Records<br><strong>{{ stats.total_score_records }}</strong></div></div>
+  <div class="col-md-3"><div class="card p-3">Top Member<br><strong>{% if stats.top_member %}{{ stats.top_member.member.full_name }}{% else %}-{% endif %}</strong></div></div>
+</div>
+<div class="mt-3">
+  <a href="{% url 'members:admin_member_list' %}" class="btn btn-primary">Manage Members</a>
+  <a href="{% url 'members:admin_score_add' %}" class="btn btn-primary">Add Points</a>
+  <a href="{% url 'members:admin_score_list' %}" class="btn btn-primary">Manage Scores</a>
+  <a href="{% url 'members:admin_category_list' %}" class="btn btn-primary">Manage Categories</a>
+  <a href="{% url 'members:ranking' %}" class="btn btn-primary">View Rankings</a>
+  <a href="{% url 'members:admin_reports' %}" class="btn btn-primary">View Reports</a>
+</div>
+<h4 class="mt-4">Recent registrations</h4>
+<ul>{% for m in recent_members %}<li>{{ m.full_name }} ({{ m.bs_id }})</li>{% endfor %}</ul>
+<h4 class="mt-4">Recent score entries</h4>
+<ul>{% for s in recent_scores %}<li>{{ s.member.full_name }} - {{ s.activity_name }}: {{ s.points }}</li>{% endfor %}</ul>
+{% endblock %}

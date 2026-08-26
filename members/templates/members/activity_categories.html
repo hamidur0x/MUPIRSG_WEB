@@ -1,0 +1,17 @@
+{% extends "members/base.html" %}
+{% block title %}Activity Categories{% endblock %}
+{% block content %}
+<h2>Activity Categories</h2>
+<a href="{% url 'members:admin_category_add' %}" class="btn btn-success mb-3">Add Category</a>
+<table class="table">
+  <thead><tr><th>Name</th><th>Active</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for c in categories %}
+    <tr>
+      <td>{{ c.name }}</td><td>{% if c.is_active %}Yes{% else %}No{% endif %}</td>
+      <td><a href="{% url 'members:admin_category_edit' c.pk %}" class="btn btn-sm btn-outline-primary">Edit</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

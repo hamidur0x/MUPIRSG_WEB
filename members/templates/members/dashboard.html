@@ -1,0 +1,23 @@
+{% extends "members/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Welcome, {{ member.full_name }}</h2>
+<div class="row">
+  <div class="col-md-3"><div class="card p-3">BS ID<br><strong>{{ member.bs_id }}</strong></div></div>
+  <div class="col-md-3"><div class="card p-3">Status<br><strong>{{ member.get_status_display }}</strong></div></div>
+  <div class="col-md-3"><div class="card p-3">Total Points<br><strong>{{ total_points }}</strong></div></div>
+  <div class="col-md-3"><div class="card p-3">Rank<br><strong>{% if rank %}#{{ rank }}{% else %}Unranked{% endif %}</strong></div></div>
+</div>
+
+<h4 class="mt-4">Category breakdown</h4>
+<ul>{% for row in category_breakdown %}<li>{{ row.category_name }}: {{ row.total }}</li>{% endfor %}</ul>
+
+<h4 class="mt-4">Recent activity</h4>
+{% for day in daily_breakdown %}
+  <p><strong>{{ day.date }}</strong> - Daily total: {{ day.daily_total }}</p>
+  <ul>{% for r in day.records %}<li>{{ r.category.name }} - {{ r.activity_name }}: {{ r.points }}</li>{% endfor %}</ul>
+{% empty %}<p>No activity yet.</p>{% endfor %}
+
+<a href="{% url 'members:score_history' %}" class="btn btn-outline-primary">Full score history</a>
+<a href="{% url 'members:profile' %}" class="btn btn-outline-secondary">Edit profile</a>
+{% endblock %}
