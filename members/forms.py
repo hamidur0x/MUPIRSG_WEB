@@ -39,6 +39,7 @@ class MemberRegistrationForm(forms.ModelForm):
             "joining_date",
             "registration_number",
             "biography",
+            "status"
         ]
         widgets = {
             "joining_date": forms.DateInput(attrs={"type": "date"}),
