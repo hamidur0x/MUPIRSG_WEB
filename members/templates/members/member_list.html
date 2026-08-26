@@ -15,7 +15,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ member.full_name }}</h5>
         <p class="card-text mb-1">BS ID: {{ member.bs_id }}</p>
-        <p class="card-text mb-1">{{ member.upodol }} - {{ member.session }}</p>
+        <p class="card-text mb-1">{{ member.department }} - {{ member.session }}</p>
         <span class="badge bg-{% if member.status == 'current' %}success{% else %}secondary{% endif %}">{{ member.get_status_display }}</span>
         <p class="card-text mt-2">Points: <strong>{{ member.total_points_annotated|default:0 }}</strong></p>
         <a href="{% url 'members:member_detail' member.bs_id %}" class="btn btn-sm btn-outline-primary">View profile</a>
