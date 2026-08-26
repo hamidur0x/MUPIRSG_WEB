@@ -28,7 +28,7 @@ class MemberRegistrationForm(forms.ModelForm):
             "full_name",
             "profile_photo",
             "student_id",
-            "department",
+            "upodol",
             "technology",
             "semester",
             "session",

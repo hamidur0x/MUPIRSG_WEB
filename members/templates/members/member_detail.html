@@ -6,7 +6,7 @@
     {% if member.profile_photo %}<img src="{{ member.profile_photo.url }}" style="max-width:150px;">{% endif %}
     <h2>{{ member.full_name }}</h2>
     <p>BS ID: {{ member.bs_id }}</p>
-    <p>{{ member.department }} - {{ member.technology }} - {{ member.session }}</p>
+    <p>{{ member.upodol }} - {{ member.technology }} - {{ member.session }}</p>
     <span class="badge bg-{% if member.status == 'current' %}success{% else %}secondary{% endif %}">{{ member.get_status_display }}</span>
     <p class="mt-2">Total Points: <strong>{{ total_points }}</strong></p>
     <p>Rank: <strong>{% if rank %}#{{ rank }}{% else %}Unranked{% endif %}</strong></p>
