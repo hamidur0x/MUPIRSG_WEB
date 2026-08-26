@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-from MUPIRSG import views.health_check
+from MUPIRSG.views import health_check
 urlpatterns = [
     path('admin/', admin.site.urls),
     path( '', views.Home, name='HomePage'),
